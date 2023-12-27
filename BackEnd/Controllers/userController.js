@@ -2,7 +2,7 @@
 const Models = require("../Models");
 
 //get user function to return all users in database
-const getUsers = (req,res) => {
+const getUsers = (req, res) => {
   Models.User.findAll({})
     .then(function (data) {
       res.send({ result: 200, data: data });
@@ -21,7 +21,7 @@ const addUser = async (req, res) => {
 
 //delete user function for deleting users
 const deleteUser = async (req, res) => {
-  await User.destroy({
+  await Models.User.destroy({
     where: { userID: req.params.userID },
   });
   res.send({ result: 204 });
@@ -29,7 +29,7 @@ const deleteUser = async (req, res) => {
 
 //function to update user details
 const updateUser = async (req, res) => {
-  await User.update(req.body, {
+  await Models.User.update(req.body, {
     where: { userID: req.params.userID },
   });
   res.send({ result: 200, user: req.body });
