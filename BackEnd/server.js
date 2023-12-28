@@ -9,6 +9,8 @@ app.get("/", (req, res) => {
 });
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
+let clientRoutes = require("./Routes/clientRoutes");
+app.use("/api/clients", clientRoutes);
 let userRoutes = require("./Routes/userRoutes");
 app.use("/api/users", userRoutes);
 app.listen(PORT, () => {
