@@ -6,11 +6,16 @@ class Property extends Model {}
 
 Property.init(
   {
-    PropertyID: {
+    propertyID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
+    },
+    propertyAddress: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      required: true,
     },
     userID: {
       type: DataTypes.INTEGER,
