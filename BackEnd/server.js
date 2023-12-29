@@ -11,6 +11,8 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 8080;
 let propertyRoutes = require("./Routes/propertyRoutes");
 app.use("/api/property", propertyRoutes);
+let openHomeAttendeeRoutes = require("./Routes/openHomeAttendeeRoutes");
+app.use("/api/openHomeAttendees", openHomeAttendeeRoutes);
 let clientRoutes = require("./Routes/clientRoutes");
 app.use("/api/clients", clientRoutes);
 let userRoutes = require("./Routes/userRoutes");
