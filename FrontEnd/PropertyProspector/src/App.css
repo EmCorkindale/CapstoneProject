@@ -1,0 +1,10 @@
+.homeComponent h1 {
+  font-size: medium;
+  padding-top: 100px;
+  padding-left: 100px;
+}
+
+.homeComponent img {
+ height: 20%;
+ padding-right: 100px;
+}
