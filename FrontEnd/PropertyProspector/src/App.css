@@ -8,3 +8,10 @@
  height: 20%;
  padding-right: 100px;
 }
+.NavBar{
+  background-color: #E5E0DC;
+  width: auto;
+}
+.logo{
+  max-height: 100px;
+}
