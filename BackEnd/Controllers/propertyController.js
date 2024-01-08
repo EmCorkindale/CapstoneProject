@@ -3,7 +3,7 @@ const Models = require("../Models");
 
 //Function to return all properties that the user has loaded on the open home page
 const getProperties = (req, res) => {
-  Models.Property.findAll({})
+  Models.Property.findAll({where: {userId: req.userId}}) // only returns property for selected user
     .then(function (data) {
       res.send({ result: 200, data: data });
     })

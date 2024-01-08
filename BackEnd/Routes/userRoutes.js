@@ -1,8 +1,14 @@
 const express = require("express");
+const verifyToken = require('../Middleware/middleware');
 const router = express.Router();
-const usersController = require("../Controllers/userController");
-router.get("/", usersController.getUsers);
-router.post("/", usersController.addUser);
-router.delete("/:userID", usersController.deleteUser);
-router.put("/:userID", usersController.updateUser);
+const usersController = require("../Controllers/usersController");
+router.post("/register", usersController.newUser);
+router.post("/login", usersController.userLogin);
+
+// Protected route
+router.get('/', verifyToken, (req, res) => {
+    res.status(200).json({ message: 'Protected route accessed' });
+    });
+   
 module.exports = router;
+
