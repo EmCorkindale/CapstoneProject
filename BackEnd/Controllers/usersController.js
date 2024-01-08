@@ -35,8 +35,8 @@ const newUser = async (req, res) => {
 // Function to allow users to login
 const userLogin= async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.findOne({where: {username}});
+    const { emailAddress, password } = req.body;
+    const user = await User.findOne({where: {emailAddress}});
     if (!user) {
       return res.status(401).json({ error: "Authentication failed" });
     }

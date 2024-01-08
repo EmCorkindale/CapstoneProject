@@ -1,4 +1,5 @@
 const express = require("express");
+const middleware = require("../BackEnd/Middleware/middleware")
 const app = express();
 require("dotenv").config();
 let dbConnect = require("./dbConnect");
@@ -10,11 +11,11 @@ app.get("/", (req, res) => {
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 let propertyRoutes = require("./Routes/propertyRoutes");
-app.use("/api/property", propertyRoutes);
+app.use("/api/property" /*middleware*/, propertyRoutes);
 let openHomeAttendeeRoutes = require("./Routes/openHomeAttendeeRoutes");
-app.use("/api/openHomeAttendees", openHomeAttendeeRoutes);
+app.use("/api/openHomeAttendees", middleware, openHomeAttendeeRoutes);
 let clientRoutes = require("./Routes/clientRoutes");
-app.use("/api/clients", clientRoutes);
+app.use("/api/clients", middleware, clientRoutes);
 let userRoutes = require("./Routes/userRoutes");
 app.use("/api/users", userRoutes);
 app.listen(PORT, () => {

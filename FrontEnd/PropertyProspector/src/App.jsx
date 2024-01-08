@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
-import { Home } from './pages/Home'
 import NavBar from './components/navBar.jsx/navBar'
+import AppRoutes from './routes/appRoutes'
 
 function App() {
 
@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <Home />
+      <AppRoutes />
     </>
   )
 }

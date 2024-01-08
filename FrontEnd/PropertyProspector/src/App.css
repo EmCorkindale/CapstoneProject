@@ -4,14 +4,45 @@
   padding-left: 100px;
 }
 
-.homeComponent img {
- height: 20%;
- padding-right: 100px;
+.body {
+  background-color: #E5E0DC;
 }
-.NavBar{
+
+.homeComponent {
+  background-color: #E5E0DC;
+}
+
+.homeComponent img {
+  height: 20%;
+  padding-right: 100px;
+}
+
+.NavBar {
   background-color: #E5E0DC;
   width: auto;
 }
-.logo{
+
+.logo {
   max-height: 100px;
+}
+
+.addPropertyCard {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  text-align: center;
+  color: #656762;
+}
+
+.addPropertyCard img {
+  min-height: 100px;
+  padding-top: 30px;
+}
+
+.properties {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: right;
+  padding: 20px;
+  margin-right: 45px;
 }
