@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -8,7 +8,7 @@ function Login({show, handleClose}) {
   
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error] = useState('');
   const { handleLogin } = useUser()
   
   const handleError = (error) => {console.error(error)}

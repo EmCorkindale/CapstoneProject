@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 const SubmitProperty = () => {
-  const [userID, setUserID] = useState("");
+  const [userID] = useState("");
   const [address, setAddress] = useState("");
   const [smShow, setSmShow] = useState(false);
 
