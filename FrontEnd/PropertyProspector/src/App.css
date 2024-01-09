@@ -46,3 +46,9 @@
   padding: 20px;
   margin-right: 45px;
 }
+.login{
+  display: flex;
+  justify-content: flex-end;
+ 
+  flex-wrap: nowrap;
+}

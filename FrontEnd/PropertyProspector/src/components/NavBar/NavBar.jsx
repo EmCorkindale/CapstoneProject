@@ -4,15 +4,19 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { Button } from 'react-bootstrap';
 import Login from '../Login/Login';
+import Register from '../SignUp/Register';
 import { useUser } from '../../contexts/userContext';
 import NavLink from 'react-bootstrap/esm/NavLink';
 import { useNavigate } from 'react-router-dom';
 
 export default function NavBar() {
 
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const [showLogin, setShowLogin] = useState(false);
+    const handleCloseLogin = () => setShowLogin(false);
+    const [showRegister, setShowRegister] = useState(false);
+    const handleCloseRegister = () => setShowRegister(false);
     const { user, handleLogout } = useUser();
     const navigate = useNavigate();
     return (
@@ -35,14 +39,20 @@ export default function NavBar() {
                                 <NavDropdown.Item to="#myAccount">My Account</NavDropdown.Item>
                                 <NavDropdown.Item onClick={handleLogout}>Sign Out</NavDropdown.Item>
                             </NavDropdown>) : (
-                                <NavLink className="justify-content-end" onClick={() => { setShow(true) }}>
-                                    Login / Sign up
-                                </NavLink>)}
+                                <Container className="login/signup">
+                                    <Button  onClick={() => { setShowLogin(true) }}>
+                                        Login
+                                    </Button>
+                                    <Button  onClick={() => { setShowRegister(true) }}>
+                                        Sign up
+                                    </Button>
+                                </Container>)}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <Login show={show} handleClose={handleClose} />
+            <Login show={showLogin} handleClose={handleCloseLogin} />
+            <Register show={showRegister} handleClose={handleCloseRegister}/>
         </>
     );
 }

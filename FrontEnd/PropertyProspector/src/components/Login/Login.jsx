@@ -3,19 +3,32 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { useUser } from '../../contexts/userContext';
+import { NavLink } from 'react-router-dom';
 
-function Login({show, handleClose}) {
-  
+function Login({ show, handleClose }) {
+
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [error] = useState('');
+  const [error, setError] = useState('');
   const { handleLogin } = useUser()
-  
-  const handleError = (error) => {console.error(error)}
-  const handleSubmit = () => {
-    handleLogin(userEmail, userPassword, handleClose, handleError)
-  }
 
+  const handleError = (error) => {
+    console.error(error);
+    setError('Login failed. Please check your credentials.')
+  }
+ const handleSubmit = () => {
+  handleLogin(
+    userEmail,
+    userPassword,
+    () => {
+      if (!error) {
+        // Handle successful login if needed
+        handleClose();
+      }
+    },
+    handleError
+  );
+};
 
   return (
     <>
@@ -33,6 +46,7 @@ function Login({show, handleClose}) {
                 autoFocus
                 value={userEmail}
                 onChange={(e) => setUserEmail(e.target.value)}
+                aria-label="Email Address"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -42,6 +56,7 @@ function Login({show, handleClose}) {
                 placeholder="*******"
                 value={userPassword}
                 onChange={(e) => setUserPassword(e.target.value)}
+                aria-label="Password"
               />
             </Form.Group>
           </Form>
@@ -54,10 +69,6 @@ function Login({show, handleClose}) {
           <Button variant="primary" onClick={handleSubmit}>
             Login
           </Button>
-          <br />
-          <p>
-            Don&apos;t have an account? <a href="signUp">Sign up</a> today!
-          </p>
         </Modal.Footer>
       </Modal>
     </>
