@@ -1,24 +1,44 @@
+// import React from 'react';
+import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from "react-bootstrap/NavDropdown";
+import Login from '../Login/Login';
+import { useUser } from '../../contexts/userContext';
+import NavLink from 'react-bootstrap/esm/NavLink';
+import { useNavigate } from 'react-router-dom';
 
 export default function NavBar() {
+   
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const { user, handleLogout } = useUser();
+    const navigate = useNavigate();
     return (
-        <Navbar expand="lg" className="NavBar">
-            <Container fluid>
-                <Navbar.Brand href="/"><img src={"../src/assets/logo.png"} className='logo'></img></Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <Nav.Link href="/database">My Database</Nav.Link>
-                        <Nav.Link href="/openHomes">Open Homes</Nav.Link>
-                        <Nav.Link href="/property">Property</Nav.Link>
-                        <Nav.Link href="/login" >Login / Sign up </Nav.Link>
-                        <Navbar.Collapse className="justify-content-end">
-                        </Navbar.Collapse>
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+        <>
+            <Navbar expand="lg" className="NavBar">
+                <Container fluid>
+                    <Navbar.Brand onClick={()=>{navigate('/')}}><img src={"../src/assets/logo.png"} className='logo' alt="Logo"></img></Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            <NavLink onClick={()=>{navigate('/database')}}>My Database</NavLink>
+                            <NavLink onClick={()=>{navigate('/openHomes')}}>Open Homes</NavLink>
+                            <NavLink onClick={()=>{navigate('/property')}}>Property</NavLink>
+                            {user ? (<NavDropdown title={`Welcome ${user.username}`}>
+                                <NavDropdown.Item to="#myAccount">My Account</NavDropdown.Item>
+                                <NavDropdown.Item onClick={handleLogout}>Sign Out</NavDropdown.Item>
+                            </NavDropdown>) : (
+                                <NavLink className="justify-content-end" onClick={() => { setShow(true) }}>
+                                    Login / Sign up
+                                </NavLink>)}
+                            </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+            <Login show={show} handleClose={handleClose} />
+        </>
     );
 }
+

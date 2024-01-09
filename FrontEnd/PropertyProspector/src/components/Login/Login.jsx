@@ -1,33 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import NavLink from 'react-bootstrap/esm/NavLink';
+import { useUser } from '../../contexts/userContext';
 
-// function Login() {
-//   const [user, setUser] = useState([]);
-
-//   useEffect(() => {
-//     fetch('http://localhost:8080/api/users')
-//       .then(response => response.json())
-//       .then( => setUser(user));
-// //   }, []);
-
-//   return (
-
-
-function Login() {
-  const [show, setShow] = useState(true);
-
-  const handleClose = () => setShow(false);
+function Login({show, handleClose}) {
+  
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [error, setError] = useState('');
+  const { handleLogin } = useUser()
+  
+  const handleError = (error) => {console.error(error)}
+  const handleSubmit = () => {
+    handleLogin(userEmail, userPassword, handleClose, handleError)
+  }
 
 
   return (
     <>
- 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Welcome to property prospector!</Modal.Title>
+          <Modal.Title>Welcome to Property Prospector!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -37,29 +31,33 @@ function Login() {
                 type="email"
                 placeholder="name@example.com"
                 autoFocus
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
               />
             </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
+            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
               <Form.Label>Password</Form.Label>
               <Form.Control
-                type='password'
-                placeholder='*******'
-                autoFocus
+                type="password"
+                placeholder="*******"
+                value={userPassword}
+                onChange={(e) => setUserPassword(e.target.value)}
               />
             </Form.Group>
           </Form>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleSubmit}>
             Login
-          </Button><br></br>
-          <p>Don't have an account? <NavLink to="signUp">Sign up</NavLink> today!</p>
+          </Button>
+          <br />
+          <p>
+            Don&apos;t have an account? <a href="signUp">Sign up</a> today!
+          </p>
         </Modal.Footer>
       </Modal>
     </>

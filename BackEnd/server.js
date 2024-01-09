@@ -1,6 +1,8 @@
 const express = require("express");
-const middleware = require("../BackEnd/Middleware/middleware")
+const middleware = require("../BackEnd/Middleware/middleware");
 const app = express();
+const cors = require("cors");
+
 require("dotenv").config();
 let dbConnect = require("./dbConnect");
 // parse requests of content-type -application / json;
@@ -10,6 +12,7 @@ app.get("/", (req, res) => {
 });
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
+app.use(cors());
 let propertyRoutes = require("./Routes/propertyRoutes");
 app.use("/api/property" /*middleware*/, propertyRoutes);
 let openHomeAttendeeRoutes = require("./Routes/openHomeAttendeeRoutes");
