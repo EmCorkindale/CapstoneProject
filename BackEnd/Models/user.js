@@ -1,14 +1,7 @@
 const { DataTypes, Model } = require("sequelize");
-const crypto = require("crypto");
+const bcrypt = require("bcrypt");
 let dbConnect = require("../dbConnect");
 const sequelizeInstance = dbConnect.Sequelize;
-
-// Function to hash the password using Node.js crypto module (this is irreversable and doesn't store the acual password. User enters their password on login and it will hash it and compare to hashed password)
-const hash = (password) => {
-  const hash = crypto.createHash("sha256");
-  hash.update(password);
-  return hash.digest("hex");
-};
 
 class User extends Model {}
 
@@ -19,6 +12,11 @@ User.init(
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      required: true,
     },
     firstName: {
       type: DataTypes.STRING,
@@ -39,11 +37,7 @@ User.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-      required: true,
-      set(value) {
-        // Hashes the password using the defined hash function
-        this.setDataValue("password", hash(value));
-      },
+      required: true
     },
   },
   {
