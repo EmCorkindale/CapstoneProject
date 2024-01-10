@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { useUser } from '../../contexts/userContext';
-import { NavLink } from 'react-router-dom';
+
 
 function Login({ show, handleClose }) {
 
@@ -26,7 +26,7 @@ function Login({ show, handleClose }) {
         handleClose();
       }
     },
-    handleError
+    handleError(error)
   );
 };
 
