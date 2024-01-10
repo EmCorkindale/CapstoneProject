@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-
+import CardBody from 'react-bootstrap';
 import { apiPropertyGet } from '../components/OpenHomeComponents/apiPropertyGet';
 import { apiPropertyDelete } from '../components/OpenHomeComponents/apiPropertyDelete';
 import { SubmitNewProperty } from '../components/OpenHomeComponents/submitNewProperty';
