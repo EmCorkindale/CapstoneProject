@@ -17,6 +17,11 @@ Property.init(
       allowNull: false,
       required: true,
     },
+    propertyImage:{
+      type: DataTypes.STRING,
+      allowNull: true,
+      required: false,
+    },
     userID: {
       type: DataTypes.INTEGER,
       references: {

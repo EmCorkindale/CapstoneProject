@@ -1,39 +1,64 @@
+// OpenHomes.jsx
+import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import SubmitProperty from '../components/OpenHomeComponents/SubmitProperty';
+import Button from 'react-bootstrap/Button';
 
-
-const properties = [{ title: "54 Perekia Street", imgUrl: "kfsdkhfsdk", id: 1 }, { title: "12 House Place", imgUrl: "kfsdkhf", id: 2 }]
+import { apiPropertyGet } from '../components/OpenHomeComponents/apiPropertyGet';
+import { apiPropertyDelete } from '../components/OpenHomeComponents/apiPropertyDelete';
+import { SubmitNewProperty } from '../components/OpenHomeComponents/submitNewProperty';
+import { CardFooter } from 'react-bootstrap';
 
 export function OpenHomes() {
+    const [properties, setProperties] = useState([]);
+    const [deletedProperty, setDeletedProperty] = useState(null);
+
+    useEffect(() => {
+        // Fetch all properties using apiPropertyGet and update the state
+        apiPropertyGet().then((data) => setProperties(data));
+    }, []);
+
+    const handleDelete = (propertyID) => {
+        // Call the delete API function with the propertyID
+        apiPropertyDelete(propertyID)
+            .then((response) => {
+                // Handle the response, set state, or perform any other actions
+                setDeletedProperty(response);
+                // After deleting, fetch updated properties
+                apiPropertyGet().then((data) => setProperties(data));
+            })
+            .catch((error) => {
+                // Handle error
+                console.error('Error deleting property:', error);
+            });
+    };
 
     return (
         <Container>
             <h1 className='properties'>My Properties</h1>
             <Row>
-                {properties && properties.map((property) => {
-                    return (
-                        <Col key={property.id}>
-                            <Card style={{ width: '18rem' }}>
-                                <Card.Img variant="top" src="holder.js/100px180" />
-                                <Card.Body>
-                                    <Card.Title>{property.title}</Card.Title>
-                                    <Card.Text>
-                                        img url = {property.imgUrl}
-                                    </Card.Text>
-                                    <Button variant="primary">Go somewhere</Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-
-                    )
-                })}
-                <SubmitProperty/>
+                {properties.map((property) => (
+                    <Col key={property.propertyID}>
+                        <Card style={{ width: '18rem' }}>
+                            <Card.Body>
+                                <Card.Title>{property.propertyAddress}</Card.Title>
+                                <Card.Img src={property.propertyImage} alt="Property" />
+                            </Card.Body>
+                            <CardFooter>
+                                <Button
+                                    variant="danger"
+                                    onClick={() => handleDelete(property.propertyID)}
+                                >
+                                    Delete Property
+                                </Button>
+                            </CardFooter>
+                        </Card>
+                    </Col>
+                ))}
+                <SubmitNewProperty />
             </Row>
         </Container>
-
-    )
+    );
 }
