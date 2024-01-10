@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import CardBody from 'react-bootstrap';
+
 import { apiPropertyGet } from '../components/OpenHomeComponents/apiPropertyGet';
 import { apiPropertyDelete } from '../components/OpenHomeComponents/apiPropertyDelete';
 import { SubmitNewProperty } from '../components/OpenHomeComponents/submitNewProperty';
@@ -18,7 +18,7 @@ export function OpenHomes() {
     useEffect(() => {
         // Fetch all properties using apiPropertyGet and update the state
         apiPropertyGet().then((data) => setProperties(data));
-    }, []);
+    });
 
     const handleDelete = (propertyID) => {
         // Call the delete API function with the propertyID

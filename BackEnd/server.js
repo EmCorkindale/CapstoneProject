@@ -18,7 +18,7 @@ app.use("/api/property" /*middleware*/, propertyRoutes);
 let openHomeAttendeeRoutes = require("./Routes/openHomeAttendeeRoutes");
 app.use("/api/openHomeAttendees", middleware, openHomeAttendeeRoutes);
 let clientRoutes = require("./Routes/clientRoutes");
-app.use("/api/clients", middleware, clientRoutes);
+app.use("/api/clients", /*middleware*/ clientRoutes);
 let userRoutes = require("./Routes/userRoutes");
 app.use("/api/users", userRoutes);
 app.listen(PORT, () => {
