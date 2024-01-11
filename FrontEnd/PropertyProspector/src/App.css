@@ -52,3 +52,8 @@
  
   flex-wrap: nowrap;
 }
+.database{
+  border-radius: 5px !important;
+  border-collapse: collapse;
+  overflow: hidden;
+}
