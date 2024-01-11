@@ -1,10 +1,11 @@
 import axios from "axios";
 
 
-export async function apiPropertyPost(propertyID) {
+export async function apiPropertyPost(propertyAddress, propertyImage) {
   try {
     const response = await axios.post("http://localhost:8080/api/property/addProperty",{
-      propertyID: propertyID
+      propertyAddress: propertyAddress,
+      propertyImage: propertyImage
     });
   return response.data
   } catch (error) {
