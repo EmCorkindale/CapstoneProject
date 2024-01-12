@@ -3,22 +3,30 @@ import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { apiPropertyPost } from './apiPropertyPost';
+import { apiPropertyGet } from './apiPropertyGet';
 import { Form, Col } from 'react-bootstrap';
 
-export function SubmitNewProperty() {
+
+export function SubmitNewProperty({handleAddProperty}) {
   const [propertyAddress, setAddress] = useState('');
   const [propertyImage, setImage] = useState('');
   const [smShow, setSmShow] = useState(false);
   const [error, setError] = useState('');
+  
+  const updateProperty = () => {
+    // Fetch updated properties after adding a new one
+    apiPropertyGet().then((data) => setProperties(data));
 
+  }
   const addProperty = () => {
     // Reset error state before making the API call
     setError('');
 
     apiPropertyPost(propertyAddress, propertyImage)
       .then((response) => {
-        console.log(response.data);
+        console.log(response);
         // Handle success
+        handleAddProperty(response.property)
       })
       .catch((error) => {
         console.error("Error adding property:", error);
@@ -31,6 +39,7 @@ export function SubmitNewProperty() {
   const onClickFunc = () => {
     addProperty();
     setSmShow(false);
+    updateProperty();
   };
 
   return (
@@ -62,12 +71,12 @@ export function SubmitNewProperty() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <Form.Control
-              type="text"
-              placeholder="Add image URL"
-              value={propertyImage}
-              onChange={(e) => setImage(e.target.value)}
-            />
+          <Form.Control
+            type="text"
+            placeholder="Add image URL"
+            value={propertyImage}
+            onChange={(e) => setImage(e.target.value)}
+          />
         </Modal.Body>
         <Modal.Footer>
           {error && <p style={{ color: 'red' }}>{error}</p>}

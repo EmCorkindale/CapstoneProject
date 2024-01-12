@@ -18,8 +18,18 @@ export function OpenHomes() {
     useEffect(() => {
         // Fetch all properties using apiPropertyGet and update the state
         apiPropertyGet().then((data) => setProperties(data));
-    });
+    },[]);
 
+useEffect(()=>{
+    console.log("PROPERTIES", properties);
+},[properties])
+const handleAddProperty = (newProperty)=>{
+    setProperties((state) => {
+        const properties = [...state]
+        properties.push(newProperty)
+        return properties
+      })
+}
     const handleDelete = (propertyID) => {
         // Call the delete API function with the propertyID
         apiPropertyDelete(propertyID)
@@ -57,7 +67,7 @@ export function OpenHomes() {
                         </Card>
                     </Col>
                 ))}
-                <SubmitNewProperty />
+                <SubmitNewProperty handleAddProperty ={handleAddProperty}/>
             </Row>
         </Container>
     );

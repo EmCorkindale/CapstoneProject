@@ -5,7 +5,8 @@ export async function apiLogin(emailAddress, password) {
     emailAddress: emailAddress,
     password: password,
   });
-sessionStorage.setItem('token',response.data.token)
+localStorage.setItem('token',response.data.token)
+localStorage.setItem('username',response.data.username)
   // Return an object with token and username
   return {
     token: response.data.token,

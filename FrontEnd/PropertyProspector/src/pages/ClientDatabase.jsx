@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { apiGetClients } from '../components/ClientDatabase/apiGetClients';
-
+import { ExpandedTableContents } from '../components/ClientDatabase/ExpandedTableContents';
+import { ExpandedTableHeading } from '../components/ClientDatabase/ExpandedTableHeading';
 
 export function ClientDatabase() {
     const [clients, setClients] = useState([]);
+
     useEffect(() => {
         // Fetch all properties using apiPropertyGet and update the state
         apiGetClients().then((data) => setClients(data));
-    });
-    return (
+    }, []); return (
         <Container>
             <Table striped bordered hover responsive>
                 <thead>
@@ -38,6 +39,7 @@ export function ClientDatabase() {
                     ))}
                 </tbody>
             </Table>
+            <ExpandedTableHeading />
         </Container>
     );
 }

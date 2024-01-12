@@ -4,13 +4,17 @@ import { useContext, useState, createContext } from "react";
 const UserContext = createContext()
 
 export function UserProvider({ children }) {
+    const storedToken = localStorage.getItem('token');
+    const storedUsername = localStorage.getItem('username');
+    const storedUser = !storedToken || !storedUsername
+        ? null 
+        : { username: storedUsername, token: storedToken };
 
-
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState(storedUser)
     const handleLogin = async (userEmail, userPassword, callbackFunc, onErrorFunc) => {
 
         apiLogin(userEmail, userPassword).then((response) => {
-            setUser({ username: response.username })
+            setUser({ username: response.username, token: response.token })
     
         }).catch((error) => { onErrorFunc(error) });
         callbackFunc();
