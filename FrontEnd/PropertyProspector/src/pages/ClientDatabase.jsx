@@ -1,17 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment, React } from 'react';
 import { Container } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
+import { FormCheck } from 'react-bootstrap';
 import { apiGetClients } from '../components/ClientDatabase/apiGetClients';
-import { ExpandedTableContents } from '../components/ClientDatabase/ExpandedTableContents';
 import { ExpandedTableHeading } from '../components/ClientDatabase/ExpandedTableHeading';
 
 export function ClientDatabase() {
     const [clients, setClients] = useState([]);
+    
 
     useEffect(() => {
         // Fetch all properties using apiPropertyGet and update the state
         apiGetClients().then((data) => setClients(data));
-    }, []); return (
+    }, []);
+
+    return (
         <Container>
             <Table striped bordered hover responsive>
                 <thead>
@@ -26,20 +29,26 @@ export function ClientDatabase() {
                 </thead>
                 <tbody>
                     {clients.map((client) => (
-                        <tr key={client.id}>
-                            <td scope="col">
-                                <input type="radio" className='clientSelect' />
-                            </td>
-                            <td>{client.firstName}</td>
-                            <td>{client.lastName}</td>
-                            <td>{client.email}</td>
-                            <td>{client.phoneNumber}</td>
-                            <td>{client.address}</td>
-                        </tr>
+                        <Fragment key={client.id}>
+                            <tr>
+                                <td>
+                                    <FormCheck type="checkbox" className='clientSelect' />
+                                </td>
+                                <td>{client.firstName}</td>
+                                <td>{client.lastName}</td>
+                                <td>{client.emailAddress}</td>
+                                <td>{client.phoneNumber}</td>
+                                <td>{client.address}</td>
+                            </tr>
+                            {/* <tr>
+                                <td colSpan={6}>
+                                    <ExpandedTableHeading />
+                                </td>
+                            </tr> */}
+                        </Fragment>
                     ))}
                 </tbody>
             </Table>
-            <ExpandedTableHeading />
         </Container>
     );
 }

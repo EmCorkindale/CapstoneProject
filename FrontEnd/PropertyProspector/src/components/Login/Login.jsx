@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { useUser } from '../../contexts/userContext';
+
 
 
 function Login({ show, handleClose }) {
@@ -10,26 +11,30 @@ function Login({ show, handleClose }) {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [error, setError] = useState('');
-  const { handleLogin } = useUser()
+  const { handleLogin, handleSuccess } = useUser()
 
   const handleError = (error) => {
     console.error(error);
     setError('Login failed. Please check your credentials.')
   }
- const handleSubmit = () => {
-  handleLogin(
-    userEmail,
-    userPassword,
-    () => {
-      if (!error) {
-        // Handle successful login if needed
-        handleClose();
-      }
-    },
-    handleError(error)
-  );
-};
-
+  const handleSubmit = () => {
+    handleLogin(
+      userEmail,
+      userPassword,
+      () => {
+        if (!error) {
+          // Handle successful login if needed
+          handleClose();
+        }
+      },
+      handleError(error)
+    );
+  };
+  useEffect(() => {
+    if (handleSuccess) {
+      handleClose();
+    }
+  }, [handleSuccess, handleClose]);
   return (
     <>
       <Modal show={show} onHide={handleClose}>

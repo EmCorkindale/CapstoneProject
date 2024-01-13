@@ -1,34 +1,40 @@
 import { apiLogin } from "../components/Login/apiLogin";
-
 import { useContext, useState, createContext } from "react";
-const UserContext = createContext()
+const UserContext = createContext();
 
 export function UserProvider({ children }) {
     const storedToken = localStorage.getItem('token');
     const storedUsername = localStorage.getItem('username');
     const storedUser = !storedToken || !storedUsername
-        ? null 
+        ? null
         : { username: storedUsername, token: storedToken };
 
-    const [user, setUser] = useState(storedUser)
-    const handleLogin = async (userEmail, userPassword, callbackFunc, onErrorFunc) => {
+    const [user, setUser] = useState(storedUser);
+    const [handleSuccess, setHandleSuccess] = useState(false);
 
-        apiLogin(userEmail, userPassword).then((response) => {
-            setUser({ username: response.username, token: response.token })
-    
-        }).catch((error) => { onErrorFunc(error) });
-        callbackFunc();
+    const handleLogin = async (userEmail, userPassword, onErrorFunc) => {
+        try {
+            const response = await apiLogin(userEmail, userPassword);
+            setUser({ username: response.username, token: response.token });
+            setHandleSuccess(true);
+        } catch (error) {
+            onErrorFunc(error);
+            setHandleSuccess(false);
+        }
     };
 
-    const handleLogout = ()=>{
+    const handleLogout = () => {
+        setUser(null);
+        setHandleSuccess(false);
+    };
 
-        setUser(null)
-    }
     return (
-        <UserContext.Provider value={{ user, handleLogin, handleLogout }} >{children}</UserContext.Provider>
-    )
-};
+        <UserContext.Provider value={{ user, handleLogin, handleLogout, handleSuccess }}>
+            {children}
+        </UserContext.Provider>
+    );
+}
 
 export function useUser() {
-    return useContext(UserContext)
+    return useContext(UserContext);
 }

@@ -15,6 +15,8 @@ const PORT = process.env.PORT || 8080;
 app.use(cors());
 let propertyRoutes = require("./Routes/propertyRoutes");
 app.use("/api/property" /*middleware*/, propertyRoutes);
+let externalApiRoutes = require("./Routes/externalApiRoutes");
+app.use("/api/currentListings" /*middleware*/, externalApiRoutes);
 let openHomeAttendeeRoutes = require("./Routes/openHomeAttendeeRoutes");
 app.use("/api/openHomeAttendees", middleware, openHomeAttendeeRoutes);
 let clientRoutes = require("./Routes/clientRoutes");
