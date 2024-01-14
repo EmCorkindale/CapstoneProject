@@ -5,6 +5,7 @@ import { PageNotFound } from "../pages/pageNotFound";
 import Login from "../components/Login/Login"
 import Register from "../components/SignUp/Register";
 import { ClientDatabase } from "../pages/ClientDatabase";
+import { Property } from "../pages/Property";
 
 
 function AppRoutes() {
@@ -16,6 +17,7 @@ function AppRoutes() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register/>} />
             <Route path="/database" element={<ClientDatabase/>} />
+            <Route path="/property" element={<Property/>}/>
             
             {/* </Route> */}
             {/* special route to handle if none of the above match */}

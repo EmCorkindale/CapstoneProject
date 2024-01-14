@@ -91,29 +91,13 @@ const fetchAdjacentSuburbs = (req, res) => {
 
 const fetchProperty = async (req, res) => {
   try {
-  //   //Request OAuth token using client credentials
-  //   const tokenResponse = await axios.post(
-  //     "https://api.trademe.co.nz/v1/Oauth/RequestToken",
-  //     null,
-  //     {
-  //       auth: {
-  //         username: process.env.consumer_key,
-  //         password: process.env.oauth_token,
-  //       },
-  //       data: {
-  //         grant_type: "client_credentials",
-  //         scope: "public",
-  //       },
-  //     }
-  //   );
-
-    // Extract the access token from the response
+  
     const accessToken = process.env.oauth_token;
     console.log(accessToken);
 
     //Use OAuth token to fetch residential property data
     const response = await axios.get(
-      "https://api.tmsandbox.co.nz/v1/Search/Property/Residential.json",
+      "https://api.tmsandbox.co.nz/v1/Search/Property/Residential.json?suburb=" + req.query.suburb,
       {
         headers: {
           Authorization: 'OAuth oauth_consumer_key=EC3038651DE14CEF11D0F8A176D435D1 , oauth_signature_method="PLAINTEXT", oauth_signature="1792449D599CA95F63F353905FC78518&"'
