@@ -39,7 +39,7 @@ export default function SuburbSelect(props) {
     };
 
     return (
-        <div>
+        <div className='suburbSelect'>
             <Dropdown autoClose={false}>
                 <Dropdown.Toggle variant="success" id="dropdown-autoclose-false">
                     {selectedSuburbs.length > 0

@@ -1,5 +1,5 @@
 import  { useState, useEffect } from "react";
-import { Col, Card, Container, Row, CardFooter } from "react-bootstrap";
+import { Col, Card, Container, Row, CardFooter, Button } from "react-bootstrap";
 import { getAllSuburbProperty } from "./getApiData";
 
 export function MatchingProperty({suburbIds }) {
@@ -26,7 +26,7 @@ export function MatchingProperty({suburbIds }) {
             <Row>
                 {matchingProperties.map((property) => (
                     <Col key={property.ListingId}>
-                        <Card style={{ width: "18rem" }}>
+                        <Card style={{ width: "18rem"}}>
                             <Card.Body>
                                 <Card.Title>{property.Address}</Card.Title>
                                 <Card.Img src={property.PictureHref} alt="PropertyImage" />

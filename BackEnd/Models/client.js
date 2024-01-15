@@ -68,6 +68,11 @@ Client.init(
       allowNull: false,
       required: true,
     },
+    priceLimit: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      required: true,
+    },
     userID: {
       type: DataTypes.INTEGER,
       references: {

@@ -20,6 +20,7 @@ export function ExpandedTableContents() {
           <th>Garage</th>
           <th>Suburb</th>
           <th>Buying or Selling?</th>
+          <th>Price limit</th>
         </tr>
       </thead>
       <tbody>
@@ -31,6 +32,7 @@ export function ExpandedTableContents() {
             <td>{client.reqGarage}</td>
             <td>{client.reqSuburb}</td>
             <td>{client.buyingOrSelling}</td>
+            <td>{client.priceLimit}</td>
           </tr>
         ))}
       </tbody>
