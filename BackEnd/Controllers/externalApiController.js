@@ -97,7 +97,8 @@ const fetchProperty = async (req, res) => {
 
     //Use OAuth token to fetch residential property data
     const response = await axios.get(
-      "https://api.tmsandbox.co.nz/v1/Search/Property/Residential.json?suburb=" + req.query.suburb,
+      `https://api.tmsandbox.co.nz/v1/Search/Property/Residential.json?suburb=${req.query.suburbIds}`,
+      
       {
         headers: {
           Authorization: 'OAuth oauth_consumer_key=EC3038651DE14CEF11D0F8A176D435D1 , oauth_signature_method="PLAINTEXT", oauth_signature="1792449D599CA95F63F353905FC78518&"'

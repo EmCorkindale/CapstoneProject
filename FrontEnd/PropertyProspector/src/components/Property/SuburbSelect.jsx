@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import PropTypes from 'prop-types';
 import { getSuburbs } from './getApiData';
-import FormCheck from 'react-bootstrap/FormCheck'
+import { Button } from 'react-bootstrap';
+import { MatchingProperty } from './MatchingProperty';
 
 export default function SuburbSelect(props) {
     const [suburbs, setSuburbs] = useState(null);
@@ -21,50 +22,52 @@ export default function SuburbSelect(props) {
         });
     }, [props.regionId, props.districtId]);
 
-    const handleSuburbSelect = (suburbItem) => {
-        setSelectedSuburbs((prevSelectedSuburbs) => {
-          const updatedSuburbs = [...prevSelectedSuburbs, suburbItem];
-          props.onSelect(updatedSuburbs.map(suburb => suburb.SuburbId));
-          return updatedSuburbs;
-        });
-      };
+    const handleSuburbSelect = () => {
+        const selectedSuburbIds = selectedSuburbs.map((suburb) => suburb.SuburbId);
+        props.onSelect(selectedSuburbIds);
+    };
+
+    const handleToggle = (suburbItem) => {
+        const isSelected = selectedSuburbs.some((suburb) => suburb.SuburbId === suburbItem.SuburbId);
     
-      const handleRemoveSuburb = (suburbItem) => {
-        setSelectedSuburbs((prevSelectedSuburbs) => {
-          const updatedSuburbs = prevSelectedSuburbs.filter(suburb => suburb.SuburbId !== suburbItem.SuburbId);
-          props.onSelect(updatedSuburbs.map(suburb => suburb.SuburbId));
-          return updatedSuburbs;
-        });
-      };
+        if (isSelected) {
+            const updatedSuburbs = selectedSuburbs.filter((suburb) => suburb.SuburbId !== suburbItem.SuburbId);
+            setSelectedSuburbs(updatedSuburbs);
+        } else {
+            setSelectedSuburbs((prevSuburbs) => [...prevSuburbs, suburbItem]);
+        }
+    };
 
     return (
         <div>
             <Dropdown autoClose={false}>
                 <Dropdown.Toggle variant="success" id="dropdown-autoclose-false">
                     {selectedSuburbs.length > 0
-                        ? selectedSuburbs.map(suburb => suburb.Name).join(', ')
+                        ? selectedSuburbs.map((suburb) => suburb.Name).join(', ')
                         : 'Select Suburb'}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    {(suburbs || []).map((suburbItem, index) => (
-                        <Dropdown.Item key={suburbItem.SuburbId}>
-                            <FormCheck
-                                type="checkbox"
-                                id={`default-checkbox-${index}`}
-                                label={suburbItem.Name || 'Unknown Suburb'}
-                                checked={selectedSuburbs.some(suburb => suburb.SuburbId === suburbItem.SuburbId)}
-                                onChange={() => handleSuburbSelect(suburbItem)}
-                                aria-label={suburbItem.Name}
-                            />
-                        </Dropdown.Item>
-                    ))}
+                    {suburbs &&
+                        suburbs.map((suburbItem, index) => (
+                            <Dropdown.Item key={suburbItem.SuburbId} className="checkbox-inline">
+                                <input
+                                    onClick={(e) => e.stopPropagation()}
+                                    type="checkbox"
+                                    id={`default-checkbox-${index}`}
+                                    checked={selectedSuburbs.some((suburb) => suburb.SuburbId === suburbItem.SuburbId)}
+                                    onChange={() => handleToggle(suburbItem)}
+                                />
+                                <label htmlFor={`default-checkbox-${index}`}>{suburbItem.Name || 'Unknown Suburb'}</label>
+                            </Dropdown.Item>
+                        ))}
                 </Dropdown.Menu>
             </Dropdown>
+            <Button onClick={handleSuburbSelect}>Search</Button>
         </div>
     );
 }
 
 // PropTypes validation
 SuburbSelect.propTypes = {
-    onSelect: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired
 };
