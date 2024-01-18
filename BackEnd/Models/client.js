@@ -29,7 +29,7 @@ Client.init(
       unique: true,
     },
     phoneNumber: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       required: true,
     },

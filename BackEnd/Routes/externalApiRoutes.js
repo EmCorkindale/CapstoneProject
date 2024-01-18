@@ -6,7 +6,7 @@ router.get("/getRegions", externalApiController.fetchRegions);
 router.get("/getDistricts/:regionId", externalApiController.fetchDistricts); 
 router.get("/getSuburbs/:regionId/:districtId", externalApiController.fetchSuburbs);
 router.get("/getSuburb/:regionId/:districtId/:suburbId", externalApiController.fetchIndividualSuburb);
-router.get("/getCurrentListings", externalApiController.fetchProperty);
+router.get("/getCurrentListings", externalApiController.fetchMatchingProperty);
 
 module.exports = router;
 

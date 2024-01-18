@@ -40,11 +40,11 @@ export function ClientDatabase() {
                                 <td>{client.phoneNumber}</td>
                                 <td>{client.address}</td>
                             </tr>
-                            {/* <tr>
+                            <tr>
                                 <td colSpan={6}>
                                     <ExpandedTableHeading />
                                 </td>
-                            </tr> */}
+                            </tr>
                         </Fragment>
                     ))}
                 </tbody>

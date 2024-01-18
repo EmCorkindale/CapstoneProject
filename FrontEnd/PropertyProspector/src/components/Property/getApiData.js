@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function getRegion() {
+export async function getRegions() {
   try {
     const response = await axios.get(
       "http://localhost:8080/api/currentListings/getRegions"
@@ -12,7 +12,7 @@ export async function getRegion() {
   }
 }
 
-export async function getDistrict(regionId) {
+export async function getDistricts(regionId) {
   try {
     const response = await axios.get(
       `http://localhost:8080/api/currentListings/getDistricts/${regionId}`
@@ -27,6 +27,7 @@ export async function getDistrict(regionId) {
 
 export async function getSuburbs(regionId, districtId) {
   try {
+    
     const response = await axios.get(
       `http://localhost:8080/api/currentListings/getSuburbs/${regionId}/${districtId}`
     );
@@ -36,7 +37,7 @@ export async function getSuburbs(regionId, districtId) {
     throw error; // Handle the error as needed
   }
 }
-export async function getAllSuburbProperty(suburbIds) {
+export async function getMatchingProperty(suburbIds, priceLow, priceHigh, bedrooms, bathrooms) {
   try {
     // Check if suburbIds is an array
     if (!Array.isArray(suburbIds)) {
@@ -51,12 +52,20 @@ export async function getAllSuburbProperty(suburbIds) {
     // Ensure suburbIds is properly encoded and join them with commas
     const encodedSuburbIds = encodeURIComponent(suburbIds.join(","));
 
-    // Construct the URL with the correct query parameter name
     const response = await axios.get(
-      `http://localhost:8080/api/currentListings/getCurrentListings?suburbIds=${encodedSuburbIds}`
+      `http://localhost:8080/api/currentListings/getCurrentListings`,
+      {
+        params: {
+          suburbIds: encodedSuburbIds,
+          priceLow: priceLow,
+          priceHigh: priceHigh,
+          bedrooms: bedrooms,
+          bathrooms: bathrooms,
+        },
+      }
     );
 
-      return response.data.data.List;
+    return response.data.data.List;
    
   } catch (error) {
     // Handle errors and throw or log as needed
@@ -64,3 +73,5 @@ export async function getAllSuburbProperty(suburbIds) {
     throw error;
   }
 }
+
+ 

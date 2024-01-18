@@ -1,56 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
-import PropTypes from 'prop-types'; 
-import { getDistrict } from './getApiData';
+import { getDistricts } from './getApiData';
 
-
-export default function DistrictSelect(props) {
-  const [district, setDistrict] = useState(null);
-  const [selectedDistrict, setSelectedDistrict] = useState(null);
+export default function DistrictSelect({ selectedRegion, selectedDistrict, onDistrictSelected }) {
+  const [districts, setDistricts] = useState(null);
 
   useEffect(() => {
-    if (!props.regionId) {
-      setDistrict(null);
-      return;
+    if (selectedRegion) {
+      // Fetch all districts using getDistricts function and update the state
+      getDistricts(selectedRegion.LocalityId).then(setDistricts);
     }
+  }, [selectedRegion]);
 
-    // Fetch all regions using getRegion function and update the state
-    getDistrict(props.regionId).then((data) => {
-      console.log(data);
-      setDistrict(data);
-    });
-  }, [props.regionId]);
-
-  const handleDistrictSelect = (districtItem) => {
-    setSelectedDistrict(districtItem);
-    props.onSelect(districtItem.DistrictId); // Pass DistrictId to the parent component
-  };
+  const handleDistrictSelect = (district) => {
+    onDistrictSelected(district);
+    console.log('Selected District in DistrictSelected:', selectedDistrict);
+  }
 
   return (
-    <div>
-        <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            {selectedDistrict ? selectedDistrict.Name : 'Select District'}
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            {(district || []).map((districtItem) => (
-              <Dropdown.Item
-                key={districtItem.DistrictId}
-                onClick={() => handleDistrictSelect(districtItem)}
-              >
-                {districtItem.Name || 'Unknown District'}
-              </Dropdown.Item>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-    </div>
+    <Dropdown>
+       <Dropdown.Toggle variant="success" id="dropdown-basic">
+        {selectedDistrict ? selectedDistrict.Name : 'Select District'}
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        {districts && districts.map((districtItem) => (
+          <Dropdown.Item
+            key={districtItem.DistrictId}
+            onClick={() => handleDistrictSelect(districtItem)}
+          >
+            {districtItem.Name || 'Unknown District'}
+          </Dropdown.Item>
+        ))}
+      </Dropdown.Menu>
+    </Dropdown>
   );
 };
-
-// Add propTypes validation
-DistrictSelect.propTypes = {
-  onSelect: PropTypes.func.isRequired,
-};
-
-
 
