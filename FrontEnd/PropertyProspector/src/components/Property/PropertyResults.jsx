@@ -17,7 +17,6 @@ console.log("matchingProperties", typeof matchingProperties);
             <Row>
                 {searchPerformed && Array.isArray(matchingProperties) && matchingProperties.length > 0 ? (
                     matchingProperties.map((property) => {
-                        console.log("PROPERTY", property);
                         return (
                             <Col key={property.ListingId}>
                                 <Card style={{ width: "18rem" }} onClick={() => openModal(property)}>
@@ -61,7 +60,7 @@ console.log("matchingProperties", typeof matchingProperties);
                     )}
                 </Modal.Body>
                 <Modal.Footer>
-                    <MatchingClients selectedProperty={selectedProperty}/>
+                    <MatchingClients bedrooms={selectedProperty?.Bedrooms} bathrooms={selectedProperty?.Bathrooms}/>
                     <Button onClick={() => setModalShow(false)}>Close</Button>
                 </Modal.Footer>
             </Modal>

@@ -80,12 +80,15 @@ export async function getMatchingProperty(
   }
 }
 
-export async function getMatchingClients(selectedProperty) {
+export async function getMatchingClients( bedrooms, bathrooms) {
   try {
     const response = await axios.get(
       "http://localhost:8080/api/clients/getMatchingClients",
       {
-        selectedProperty: selectedProperty,
+        params: {
+          bedrooms: bedrooms,
+          bathrooms: bathrooms,
+        }
       }
     );
     console.log("CLIENT ERROR", response);

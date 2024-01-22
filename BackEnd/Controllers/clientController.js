@@ -41,8 +41,7 @@ const { Op } = require("sequelize");
 
 const filterClients = async (req, res) => {
   try {
-    
-    const {  priceHigh, bedrooms, bathrooms } = req.query;
+    const { priceHigh, bedrooms, bathrooms } = req.query;
     const bedroomsInt = parseInt(bedrooms);
     const bathroomsInt = parseInt(bathrooms);
 
@@ -50,7 +49,7 @@ const filterClients = async (req, res) => {
     let filters = {};
 
     if (bedroomsInt) {
-      filters.reqBedsMin= {
+      filters.reqBedsMin = {
         [Op.lte]: bedroomsInt,
       };
     }
@@ -72,7 +71,9 @@ const filterClients = async (req, res) => {
     }
 
     if (bathroomsInt) {
-      filters.reqBaths = bathroomsInt;
+      filters.reqBaths = {
+        [Op.lte]: bathroomsInt,
+      };
     }
     console.log(filters);
     const clients = await Models.Client.findAll({
@@ -87,7 +88,6 @@ const filterClients = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
 
 module.exports = {
   getClients,
