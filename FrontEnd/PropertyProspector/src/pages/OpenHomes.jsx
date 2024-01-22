@@ -1,10 +1,10 @@
-// OpenHomes.jsx
 import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
 import { apiPropertyGet } from '../components/OpenHomeComponents/apiPropertyGet';
 import { apiPropertyDelete } from '../components/OpenHomeComponents/apiPropertyDelete';
@@ -14,22 +14,25 @@ import { CardFooter } from 'react-bootstrap';
 export function OpenHomes() {
     const [properties, setProperties] = useState([]);
     const [deletedProperty, setDeletedProperty] = useState(null);
+    const navigate = useNavigate();  
 
     useEffect(() => {
         // Fetch all properties using apiPropertyGet and update the state
         apiPropertyGet().then((data) => setProperties(data));
-    },[]);
+    }, []);
 
-useEffect(()=>{
-    console.log("PROPERTIES", properties);
-},[properties])
-const handleAddProperty = (newProperty)=>{
-    setProperties((state) => {
-        const properties = [...state]
-        properties.push(newProperty)
-        return properties
-      })
-}
+    useEffect(() => {
+        console.log("PROPERTIES", properties);
+    }, [properties])
+
+    const handleAddProperty = (newProperty) => {
+        setProperties((state) => {
+            const properties = [...state]
+            properties.push(newProperty)
+            return properties
+        })
+    }
+
     const handleDelete = (propertyID) => {
         // Call the delete API function with the propertyID
         apiPropertyDelete(propertyID)
@@ -45,6 +48,12 @@ const handleAddProperty = (newProperty)=>{
             });
     };
 
+    const handleCardClick = (propertyID) => {
+        // Navigate to '/openHomeRegister' when a property card is clicked
+        navigate('/openHomeRegister/${propertyID}');
+    };
+
+
     return (
         <Container>
             <h1 className='properties'>My Properties</h1>
@@ -57,6 +66,7 @@ const handleAddProperty = (newProperty)=>{
                                 <Card.Img src={property.propertyImage} alt="Property" />
                             </Card.Body>
                             <CardFooter>
+                                <Button onClick={handleCardClick}>Open Home Register</Button>
                                 <Button
                                     variant="danger"
                                     onClick={() => handleDelete(property.propertyID)}
@@ -67,7 +77,7 @@ const handleAddProperty = (newProperty)=>{
                         </Card>
                     </Col>
                 ))}
-                <SubmitNewProperty handleAddProperty ={handleAddProperty}/>
+                <SubmitNewProperty handleAddProperty={handleAddProperty} />
             </Row>
         </Container>
     );

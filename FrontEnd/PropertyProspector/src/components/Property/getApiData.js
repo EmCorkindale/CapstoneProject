@@ -71,7 +71,7 @@ export async function getMatchingProperty(
         },
       }
     );
-
+    console.log("RESPONSE", response);
     return response.data.data.List;
   } catch (error) {
     // Handle errors and throw or log as needed
@@ -82,13 +82,13 @@ export async function getMatchingProperty(
 
 export async function getMatchingClients(selectedProperty) {
   try {
-    const response = await axios.post(
-      "http://localhost:8080/api/matchingClients",
+    const response = await axios.get(
+      "http://localhost:8080/api/clients/getMatchingClients",
       {
         selectedProperty: selectedProperty,
       }
     );
-
+    console.log("CLIENT ERROR", response);
     return response.data.clients;
   } catch (error) {
     console.error("Error fetching matching clients:", error);

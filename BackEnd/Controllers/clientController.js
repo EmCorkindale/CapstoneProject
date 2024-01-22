@@ -2,7 +2,6 @@
 const { query } = require("express");
 const Models = require("../Models");
 
-
 //Function to return all clients in the users' client base
 const getClients = (req, res) => {
   Models.Client.findAll({})
@@ -38,20 +37,46 @@ const updateClient = async (req, res) => {
 };
 
 //function to filter clients based on external api search paramaters
-const { Op } = require('sequelize');
+const { Op } = require("sequelize");
 
 const filterClients = async (req, res) => {
   try {
-    const { suburbIds, priceHigh, bedroomsMin, bedroomsMax, bathrooms } = req.query;
+    
+    const {  priceHigh, bedrooms, bathrooms } = req.query;
+    const bedroomsInt = parseInt(bedrooms);
+    const bathroomsInt = parseInt(bathrooms);
 
+    // Build query parameters
+    let filters = {};
+
+    if (bedroomsInt) {
+      filters.reqBedsMin= {
+        [Op.lte]: bedroomsInt,
+      };
+    }
+
+    // if (suburbIds) {
+    //   filters.suburbId = suburbIds;
+    // }
+
+    if (priceHigh) {
+      filters.priceLimit = {
+        [Op.lte]: priceHigh,
+      };
+    }
+
+    if (bedroomsInt) {
+      filters.reqBedsMax = {
+        [Op.gte]: bedroomsInt,
+      };
+    }
+
+    if (bathroomsInt) {
+      filters.reqBaths = bathroomsInt;
+    }
+    console.log(filters);
     const clients = await Models.Client.findAll({
-      where: {
-        // reqSuburb: {
-          
-        // },
-        //  
-        reqBathrooms: bathrooms,
-      },
+      where: filters,
     });
 
     res.json({
@@ -62,7 +87,6 @@ const filterClients = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
 
 
 module.exports = {

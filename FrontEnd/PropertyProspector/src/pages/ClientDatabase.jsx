@@ -7,7 +7,6 @@ import { ExpandedTableHeading } from '../components/ClientDatabase/ExpandedTable
 
 export function ClientDatabase() {
     const [clients, setClients] = useState([]);
-    
 
     useEffect(() => {
         // Fetch all properties using apiPropertyGet and update the state
@@ -28,25 +27,26 @@ export function ClientDatabase() {
                     </tr>
                 </thead>
                 <tbody>
-                    {clients.map((client) => (
-                        <Fragment key={client.id}>
-                            <tr>
-                                <td>
-                                    <FormCheck type="checkbox" className='clientSelect' />
-                                </td>
-                                <td>{client.firstName}</td>
-                                <td>{client.lastName}</td>
-                                <td>{client.emailAddress}</td>
-                                <td>{client.phoneNumber}</td>
-                                <td>{client.address}</td>
-                            </tr>
-                            <tr>
-                                <td colSpan={6}>
-                                    <ExpandedTableHeading />
-                                </td>
-                            </tr>
-                        </Fragment>
-                    ))}
+                    {clients.map((client) =>  (
+                            <Fragment key={client.clientID}>
+                                <tr>
+                                    <td>
+                                        <FormCheck type="checkbox" className='clientSelect' />
+                                    </td>
+                                    <td>{client.firstName}</td>
+                                    <td>{client.lastName}</td>
+                                    <td>{client.emailAddress}</td>
+                                    <td>{client.phoneNumber}</td>
+                                    <td>{client.address}</td>
+                                </tr>
+                                <tr>
+                                    <td colSpan={6}>
+                                        <ExpandedTableHeading clientID={client.clientID}/>
+                                    </td>
+                                </tr>
+                            </Fragment>
+                        )
+                    )}
                 </tbody>
             </Table>
         </Container>

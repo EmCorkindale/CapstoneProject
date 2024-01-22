@@ -1,41 +1,25 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { apiGetClients } from "./apiGetClients";
 import { Table } from "react-bootstrap";
 
-export function ExpandedTableContents() {
-  const [clients, setClients] = useState([]);
+export function ExpandedTableContents({ clientID }) {
+  const [client, setClient] = useState(null);
 
   useEffect(() => {
-    // Fetch all clients using apiGetClients and update the state
-    apiGetClients().then((data) => setClients(data));
-  }, []);
+    // Fetch the specific client using apiGetClients and update the state
+    apiGetClients().then((data) => {
+      const selectedClient = data.find((client) => client.clientID === clientID);
+      setClient(selectedClient);
+    });
+  }, [clientID]);
+
+  if (!client) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <Table striped bordered hover responsive>
-      <thead>
-        <tr>
-          <th>Bedrooms</th>
-          <th>Bathrooms</th>
-          <th>Living</th>
-          <th>Garage</th>
-          <th>Suburb</th>
-          <th>Buying or Selling?</th>
-          <th>Price limit</th>
-        </tr>
-      </thead>
-      <tbody>
-        {clients.map((client) => (
-          <tr key={client.id}>
-            <td>{client.reqBedsMin}-{client.reqBedsMax}</td>
-            <td>{client.reqBaths}</td>
-            <td>{client.reqLiving}</td>
-            <td>{client.reqGarage}</td>
-            <td>{client.reqSuburb}</td>
-            <td>{client.buyingOrSelling}</td>
-            <td>{client.priceLimit}</td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+    <div>
+      <p>Bedrooms: {client.reqBedsMin}-{client.reqBedsMax}, Bathrooms: {client.reqBaths}, Living: {client.reqLiving}, Garage: {client.reqGarage}, Suburb: {client.reqSuburb}, Buying or Selling: {client.buyingOrSelling},Price limit: {client.priceLimit}</p>
+    </div>
   );
 }

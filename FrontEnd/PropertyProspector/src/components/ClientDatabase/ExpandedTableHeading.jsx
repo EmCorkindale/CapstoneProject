@@ -1,10 +1,9 @@
-import React from "react";
 import { Table } from "react-bootstrap";
 import { useOpenController } from "../../hooks/isOpen";
 import { ExpandButton } from "../Reusable/expandButton";
 import { ExpandedTableContents } from "./ExpandedTableContents";
 
-export function ExpandedTableHeading() {
+export function ExpandedTableHeading({clientID}) {
   const { isOpen, toggle } = useOpenController(false);
 
   return (
@@ -17,7 +16,7 @@ export function ExpandedTableHeading() {
         </tr>
       </thead>
       <tbody>
-        {isOpen && <ExpandedTableContents />}
+        {isOpen && <ExpandedTableContents clientID={clientID}/>}
       </tbody>
     </Table>
   );

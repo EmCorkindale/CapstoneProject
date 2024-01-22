@@ -74,7 +74,7 @@ Client.init(
       required: true,
     },
     priceLimit: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       required: true,
     },

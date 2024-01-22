@@ -2,7 +2,7 @@ import { Col, Card, Container, Row, CardFooter, Button, Modal } from "react-boot
 import { useState } from "react";
 import MatchingClients from "./MatchingClients";
 
-export function PropertyResults({ matchingProperties, searchPerformed}) {
+export function PropertyResults({ matchingProperties, searchPerformed }) {
     const [modalShow, setModalShow] = useState(false);
     const [selectedProperty, setSelectedProperty] = useState(null);
 
@@ -11,27 +11,30 @@ export function PropertyResults({ matchingProperties, searchPerformed}) {
         setModalShow(true);
     };
 
-
+console.log("matchingProperties", typeof matchingProperties);
     return (
         <Container>
             <Row>
                 {searchPerformed && Array.isArray(matchingProperties) && matchingProperties.length > 0 ? (
-                    matchingProperties.map((property) => (
-                        <Col key={property.ListingId}>
-                            <Card style={{ width: "18rem" }} onClick={() => openModal(property)}>
-                                <Card.Body>
-                                    <Card.Title>{property.Address}</Card.Title>
-                                    <Card.Img src={property.PictureHref ? property.PictureHref : property.PhotoUrls} alt="PropertyImage" />
-                                </Card.Body>
-                                <CardFooter>
-                                    {`${property.Bedrooms} Bedrooms, ${property.Bathrooms} Bathrooms, ${property.Parking},  ${property.Lounges !== null ? property.Lounges + " Living," : ""} Parking: ${property.TotalParking} Property Type:${property.PropertyType}, Area: ${property.Area} `}
-                                    <Button variant="primary" onClick={() => openModal(property)}>
-                                        Match to database
-                                    </Button>
-                                </CardFooter>
-                            </Card>
-                        </Col>
-                    ))
+                    matchingProperties.map((property) => {
+                        console.log("PROPERTY", property);
+                        return (
+                            <Col key={property.ListingId}>
+                                <Card style={{ width: "18rem" }} onClick={() => openModal(property)}>
+                                    <Card.Body>
+                                        <Card.Title>{property.Address}</Card.Title>
+                                        <Card.Img src={property.PictureHref ? property.PictureHref : property.PhotoUrls} alt="PropertyImage" />
+                                    </Card.Body>
+                                    <CardFooter>
+                                        {`${property.Bedrooms} Bedrooms, ${property.Bathrooms} Bathrooms, ${property.Parking},  ${property.Lounges !== null ? property.Lounges + " Living," : ""} Parking: ${property.TotalParking} Property Type:${property.PropertyType}, Area: ${property.Area} `}
+                                        <Button variant="primary" onClick={() => openModal(property)}>
+                                            Match to database
+                                        </Button>
+                                    </CardFooter>
+                                </Card>
+                            </Col>
+                        )
+                    })
                 ) : (
                     searchPerformed && <p>No matching properties found.</p>
                 )}
@@ -58,7 +61,7 @@ export function PropertyResults({ matchingProperties, searchPerformed}) {
                     )}
                 </Modal.Body>
                 <Modal.Footer>
-                    <MatchingClients/>
+                    <MatchingClients selectedProperty={selectedProperty}/>
                     <Button onClick={() => setModalShow(false)}>Close</Button>
                 </Modal.Footer>
             </Modal>

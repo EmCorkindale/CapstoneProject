@@ -20,19 +20,19 @@ const addOpenHomeAttendees = async (req, res) => {
   res.send({ result: 200, openHomeAttendee: createdOpenHomeAttendee });
 };
 
-//Function for deleting attendees from open home
-const deleteOpenHomeAttendee = async (req, res) => {
-  await Models.OpenHomeAttendee.destroy({
-    where: { propertyID: req.params.openHomeAttendeeID },
-  });
-  res.send({ result: 204 });
-};
+// //Function for deleting attendees from open home
+// const deleteOpenHomeAttendee = async (req, res) => {
+//   await Models.OpenHomeAttendee.destroy({
+//     where: { propertyID: req.params.openHomeAttendeeID },
+//   });
+//   res.send({ result: 204 });
+// };
 
-//function to update open home attendee details
-const updateOpenHomeAttendee = async (req, res) => {
-  await Models.OpenHomeAttendee.update(req.body, {
-    where: { openHomeAttendeeID: req.params.openHomeAttendeeID },
-  });
-  res.send({ result: 200, openHomeAttendee: req.body });
-};
-module.exports = { getOpenHomeAttendees, addOpenHomeAttendees, deleteOpenHomeAttendee, updateOpenHomeAttendee };
+// //function to update open home attendee details
+// const updateOpenHomeAttendee = async (req, res) => {
+//   await Models.OpenHomeAttendee.update(req.body, {
+//     where: { openHomeAttendeeID: req.params.openHomeAttendeeID },
+//   });
+//   res.send({ result: 200, openHomeAttendee: req.body });
+// };
+module.exports = { getOpenHomeAttendees, addOpenHomeAttendees };

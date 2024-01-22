@@ -6,6 +6,7 @@ import Login from "../components/Login/Login"
 import Register from "../components/SignUp/Register";
 import { ClientDatabase } from "../pages/ClientDatabase";
 import { Property } from "../pages/Property";
+import { OpenHomeRegister } from "../components/OpenHomeComponents/OpenHomeRegister";
 
 
 function AppRoutes() {
@@ -18,6 +19,7 @@ function AppRoutes() {
             <Route path="/register" element={<Register/>} />
             <Route path="/database" element={<ClientDatabase/>} />
             <Route path="/property" element={<Property/>}/>
+            <Route path="/openHomeRegister/${propertyID}" element={<OpenHomeRegister/>}/>
             
             {/* </Route> */}
             {/* special route to handle if none of the above match */}

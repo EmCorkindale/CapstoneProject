@@ -44,12 +44,12 @@ export function Property (){
         <DistrictSelect selectedRegion={selectedRegion} selectedDistrict={selectedDistrict} onDistrictSelected={setSelectedDistrict} />
         <SuburbSelect selectedRegion={selectedRegion} selectedDistrict={selectedDistrict} selectedSuburbs= {selectedSuburbs} onSuburbsSelected={setSelectedSuburbs}/>
         <Button onClick={performSearch}>Search</Button>
-        <Button onClick={() => setSearchPerformed(false)}>Clear</Button>
+        {/* <Button onClick={() => setSearchPerformed(false)}>Clear</Button> */}
         </div>
         <div className="expandedSearch"> 
         <ExpandedSearch expandedOptions={expandedOptions} onExpandedOptionsChanged={onExpandedOptionsChanged}/>
         </div>
-        <PropertyResults matchingProperties={clearSearch} searchPerformed={searchPerformed} />  
+        <PropertyResults matchingProperties={matchingProperties} searchPerformed={searchPerformed} />  
         </Container>
         </> 
     );
