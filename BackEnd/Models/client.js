@@ -43,7 +43,12 @@ Client.init(
       allowNull: false,
       required: true,
     },
-    reqBeds: {
+    reqBedsMin: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    },
+    reqBedsMax: {
       type: DataTypes.INTEGER,
       allowNull: false,
       required: true,
@@ -90,4 +95,3 @@ Client.init(
 );
 
 module.exports = Client;
-

@@ -27,7 +27,6 @@ export async function getDistricts(regionId) {
 
 export async function getSuburbs(regionId, districtId) {
   try {
-    
     const response = await axios.get(
       `http://localhost:8080/api/currentListings/getSuburbs/${regionId}/${districtId}`
     );
@@ -37,7 +36,14 @@ export async function getSuburbs(regionId, districtId) {
     throw error; // Handle the error as needed
   }
 }
-export async function getMatchingProperty(suburbIds, priceLow, priceHigh, bedrooms, bathrooms) {
+export async function getMatchingProperty(
+  suburbIds,
+  priceLow,
+  priceHigh,
+  bedroomsMin,
+  bedroomsMax,
+  bathrooms
+) {
   try {
     // Check if suburbIds is an array
     if (!Array.isArray(suburbIds)) {
@@ -59,14 +65,14 @@ export async function getMatchingProperty(suburbIds, priceLow, priceHigh, bedroo
           suburbIds: encodedSuburbIds,
           priceLow: priceLow,
           priceHigh: priceHigh,
-          bedrooms: bedrooms,
+          bedroomsMin: bedroomsMin,
+          bedroomsMax: bedroomsMax,
           bathrooms: bathrooms,
         },
       }
     );
 
     return response.data.data.List;
-   
   } catch (error) {
     // Handle errors and throw or log as needed
     console.error("Error fetching properties:", error);
@@ -74,4 +80,18 @@ export async function getMatchingProperty(suburbIds, priceLow, priceHigh, bedroo
   }
 }
 
- 
+export async function getMatchingClients(selectedProperty) {
+  try {
+    const response = await axios.post(
+      "http://localhost:8080/api/matchingClients",
+      {
+        selectedProperty: selectedProperty,
+      }
+    );
+
+    return response.data.clients;
+  } catch (error) {
+    console.error("Error fetching matching clients:", error);
+    throw error;
+  }
+}

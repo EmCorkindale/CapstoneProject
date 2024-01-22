@@ -90,7 +90,7 @@ const fetchAdjacentSuburbs = (req, res) => {
 };
 
 const fetchMatchingProperty = async (req, res) => {
-  const { suburbIds, priceLow, priceHigh, bedrooms, bathrooms } = req.query;
+  const { suburbIds, priceLow, priceHigh, bedroomsMin, bedroomsMax, bathrooms } = req.query;
 console.log(req.query);
   try {
     const accessToken = process.env.oauth_token;
@@ -105,8 +105,11 @@ console.log(req.query);
       queryParams += `&price_max=${priceHigh}`; 
     }
 
-    if (bedrooms) {
-      queryParams += `&bedrooms_min=${bedrooms}`; 
+    if (bedroomsMin) {
+      queryParams += `&bedrooms_min=${bedroomsMin}`; 
+    }
+    if (bedroomsMax) {
+      queryParams += `&bedrooms_max=${bedroomsMax}`; 
     }
 
     if (bathrooms) {

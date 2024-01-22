@@ -26,7 +26,7 @@ export function ExpandedTableContents() {
       <tbody>
         {clients.map((client) => (
           <tr key={client.id}>
-            <td>{client.reqBeds}</td>
+            <td>{client.reqBedsMin}-{client.reqBedsMax}</td>
             <td>{client.reqBaths}</td>
             <td>{client.reqLiving}</td>
             <td>{client.reqGarage}</td>
