@@ -1,6 +1,7 @@
 "use strict";
 const { query } = require("express");
 const Models = require("../Models");
+const { Op } = require("sequelize");
 
 //Function to return all clients in the users' client base
 const getClients = (req, res) => {
@@ -36,48 +37,61 @@ const updateClient = async (req, res) => {
   res.send({ result: 200, client: req.body });
 };
 
-//function to filter clients based on external api search paramaters
-const { Op } = require("sequelize");
+//function to add suburbs to client's property wishlist
+const addSuburb = async (req, res) => {
+  const suburb = req.body;
+  const suburbCreate = await Models.Suburbs.create(suburb);
+  res.send({ result: 200, client: suburbCreate });
+}
 
+//function to filter clients based on external api search paramaters
 const filterClients = async (req, res) => {
   try {
-    const { priceHigh, bedrooms, bathrooms } = req.query;
+    const { priceHigh, bedrooms, bathrooms, suburb } = req.query;
     const bedroomsInt = parseInt(bedrooms);
     const bathroomsInt = parseInt(bathrooms);
 
-    // Build query parameters
-    let filters = {};
+    // Build query parameters for Clients
+    let clientFilters = {};
 
     if (bedroomsInt) {
-      filters.reqBedsMin = {
+      clientFilters.reqBedsMin = {
         [Op.lte]: bedroomsInt,
       };
-    }
-
-    // if (suburbIds) {
-    //   filters.suburbId = suburbIds;
-    // }
-
-    if (priceHigh) {
-      filters.priceLimit = {
-        [Op.lte]: priceHigh,
-      };
-    }
-
-    if (bedroomsInt) {
-      filters.reqBedsMax = {
+      clientFilters.reqBedsMax = {
         [Op.gte]: bedroomsInt,
       };
     }
 
+    // if (priceHigh) {
+    //   clientFilters.priceLimit = {
+    //     [Op.lte]: priceHigh,
+    //   };
+    // }
+
     if (bathroomsInt) {
-      filters.reqBaths = {
+      clientFilters.reqBaths = {
         [Op.lte]: bathroomsInt,
       };
     }
-    console.log(filters);
+
+    // Build query parameters for Suburbs
+    let suburbFilters = {};
+
+    if (suburb) {
+      suburbFilters.name = suburb;
+    }
+
+    console.log("CLIENTFILTERS!", clientFilters)
+    // Perform a join operation
     const clients = await Models.Client.findAll({
-      where: filters,
+      where: clientFilters,
+      include: [
+        {
+          model: Models.Suburbs,
+          where: suburbFilters,
+        },
+      ],
     });
 
     res.json({
@@ -89,10 +103,13 @@ const filterClients = async (req, res) => {
   }
 };
 
+
+
 module.exports = {
   getClients,
   addClient,
   deleteClient,
   updateClient,
   filterClients,
+  addSuburb,
 };

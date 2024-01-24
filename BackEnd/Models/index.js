@@ -3,6 +3,7 @@ const Client = require("./client"); // require the client model
 const User = require("./user"); // require the user model
 const Property = require("./property"); //require the property model
 const OpenHomeAttendee = require("./openHomeAttendee"); // require the openHomeAttendee model
+const Suburbs = require("./suburbs"); //require the suburb model
 
 async function init() {
   try {
@@ -11,6 +12,7 @@ async function init() {
     await Client.sync();
     await Property.sync();
     await OpenHomeAttendee.sync();
+    await Suburbs.sync();
 
     // Setting up the foreign key "userID" in the Client table
     User.hasMany(Client, { foreignKey: "userID" });
@@ -19,6 +21,10 @@ async function init() {
     // Setting up the foreign key "userID" in Properties table
     User.hasMany(Property, { foreignKey: "userID" });
     Property.belongsTo(User, { foreignKey: "userID" });
+
+    // Setting up the foreign key "clientID" in Suburbs table
+    Client.hasMany(Suburbs, { foreignKey: "clientID" });
+    Suburbs.belongsTo(Client, { foreignKey: "clientID" });
 
     // Setting up the foreign keys 'propertyID' and 'clientID' in the openHomeAttendees table
     Property.hasMany(OpenHomeAttendee, { foreignKey: "propertyID" });
@@ -38,4 +44,5 @@ module.exports = {
   Client,
   Property,
   OpenHomeAttendee,
+  Suburbs,
 };

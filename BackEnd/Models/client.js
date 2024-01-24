@@ -68,11 +68,6 @@ Client.init(
       allowNull: false,
       required: true,
     },
-    reqSuburb: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-      required: true,
-    },
     priceLimit: {
       type: DataTypes.INTEGER,
       allowNull: false,

@@ -60,7 +60,7 @@ console.log("matchingProperties", typeof matchingProperties);
                     )}
                 </Modal.Body>
                 <Modal.Footer>
-                    <MatchingClients bedrooms={selectedProperty?.Bedrooms} bathrooms={selectedProperty?.Bathrooms}/>
+                    <MatchingClients suburb={selectedProperty?.Suburb} bedrooms={selectedProperty?.Bedrooms} bathrooms={selectedProperty?.Bathrooms}/>
                     <Button onClick={() => setModalShow(false)}>Close</Button>
                 </Modal.Footer>
             </Modal>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getMatchingClients } from './getApiData';
 
-export default function MatchingClients({ bedrooms, bathrooms }) {
+export default function MatchingClients({ suburb, bedrooms, bathrooms }) {
     const [matchingClients, setMatchingClients] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -11,7 +11,7 @@ export default function MatchingClients({ bedrooms, bathrooms }) {
                 setLoading(true);
 
                 // Call the API function to get matching clients based on the selected property
-                const clients = await getMatchingClients( bedrooms, bathrooms);
+                const clients = await getMatchingClients( suburb, bedrooms, bathrooms);
 
                 setMatchingClients(clients);
                 setLoading(false);
@@ -22,13 +22,13 @@ export default function MatchingClients({ bedrooms, bathrooms }) {
         };
 
         // Check if a property is selected before fetching clients
-        if (bedrooms || bathrooms) {
+        if (suburb, bedrooms || bathrooms) {
             fetchMatchingClients();
         } else {
             // Reset matchingClients if no property is selected
             setMatchingClients([]);
         }
-    }, [ bedrooms, bathrooms]);
+    }, [suburb, bedrooms, bathrooms]);
 
     return (
         <div>
