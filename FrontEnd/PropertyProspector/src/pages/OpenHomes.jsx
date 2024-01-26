@@ -10,49 +10,38 @@ import { apiPropertyGet } from '../components/OpenHomeComponents/apiPropertyGet'
 import { apiPropertyDelete } from '../components/OpenHomeComponents/apiPropertyDelete';
 import { SubmitNewProperty } from '../components/OpenHomeComponents/submitNewProperty';
 import { CardFooter } from 'react-bootstrap';
+import { OpenHomeRegister } from '../components/OpenHomeComponents/OpenHomeRegister';
+
+
 
 export function OpenHomes() {
-    const [properties, setProperties] = useState([]);
+    const [properties, setProperties] = useState([]); // Rename to 'properties' for clarity
     const [deletedProperty, setDeletedProperty] = useState(null);
     const navigate = useNavigate();  
 
     useEffect(() => {
-        // Fetch all properties using apiPropertyGet and update the state
         apiPropertyGet().then((data) => setProperties(data));
     }, []);
 
-    useEffect(() => {
-        console.log("PROPERTIES", properties);
-    }, [properties])
-
     const handleAddProperty = (newProperty) => {
-        setProperties((state) => {
-            const properties = [...state]
-            properties.push(newProperty)
-            return properties
-        })
+        setProperties((state) => [...state, newProperty]);
     }
 
     const handleDelete = (propertyID) => {
-        // Call the delete API function with the propertyID
         apiPropertyDelete(propertyID)
             .then((response) => {
-                // Handle the response, set state, or perform any other actions
                 setDeletedProperty(response);
-                // After deleting, fetch updated properties
                 apiPropertyGet().then((data) => setProperties(data));
             })
             .catch((error) => {
-                // Handle error
                 console.error('Error deleting property:', error);
             });
     };
 
     const handleCardClick = (propertyID) => {
-        // Navigate to '/openHomeRegister' when a property card is clicked
-        navigate('/openHomeRegister/${propertyID}');
+        // Corrected: Use a different variable name for the property ID
+        navigate(`/openHomeRegister/${propertyID}`);
     };
-
 
     return (
         <Container>
@@ -66,7 +55,9 @@ export function OpenHomes() {
                                 <Card.Img src={property.propertyImage} alt="Property" />
                             </Card.Body>
                             <CardFooter>
-                                <Button onClick={handleCardClick}>Open Home Register</Button>
+                                <Button onClick={() => handleCardClick(property.propertyID)}>
+                                    Open Home Register
+                                </Button>
                                 <Button
                                     variant="danger"
                                     onClick={() => handleDelete(property.propertyID)}

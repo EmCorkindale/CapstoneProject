@@ -26,7 +26,7 @@ export default function NavBar() {
                     <Navbar.Brand onClick={() => { navigate('/') }}><img src={"../src/assets/logo.png"} className='logo' alt="Logo"></img></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
+                        <Nav className="d-flex ms-auto">
                             {user ? (<NavLink onClick={() => { navigate('/database') }}>My Database</NavLink>) : (
                                 <NavLink style={{ visibility: 'hidden' }}>My Database</NavLink>
                             )}
@@ -35,15 +35,15 @@ export default function NavBar() {
                             )}
                             {user ? (<NavLink onClick={() => { navigate('/property') }}>Property</NavLink>) : (
                                 <NavLink style={{ visibility: 'hidden' }}>Property</NavLink>)}
-                            {user ? (<NavDropdown title={`Welcome ${user.username}`}>
+                            {user ? (<NavDropdown title={`Welcome ${user.username}`} className= 'ml-auto'>
                                 <NavDropdown.Item to="#myAccount">My Account</NavDropdown.Item>
                                 <NavDropdown.Item onClick={handleLogout}>Sign Out</NavDropdown.Item>
                             </NavDropdown>) : (
                                 <Container className="login/signup">
-                                    <Button  onClick={() => { setShowLogin(true) }}>
+                                    <Button  variant='outline' onClick={() => { setShowLogin(true) }} className='loginButton'>
                                         Login
                                     </Button>
-                                    <Button  onClick={() => { setShowRegister(true) }}>
+                                    <Button  variant='outline' onClick={() => { setShowRegister(true) }} className='SignUpButton'>
                                         Sign up
                                     </Button>
                                 </Container>)}

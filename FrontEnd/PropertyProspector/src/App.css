@@ -1,22 +1,42 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
-.homeComponent h1 {
-  font-size: medium;
-  padding-top: 100px;
-  padding-left: 100px;
-}
-
 .body {
   background-color: #E5E0DC;
 }
+.homeHeading{
+  font-family: 'Raleway', sans-serif;
+ font-size: large;
+ padding-top: 100px;
+ padding-left: 100px;
+ display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  line-height: 2.0;
+}
 
+.homeText{
+  font-family: 'Raleway', sans-serif;
+  font-size: medium;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 300px;
+  text-align: center;
+  padding: auto;
+  max-width: 50em;
+}
 .homeComponent {
   background-color: #E5E0DC;
 }
 
-.homeComponent img {
-  height: 20%;
+.homeImage {
+  max-height: 20%;
   padding-right: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .NavBar {
@@ -51,11 +71,17 @@
 
 .login {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 
   flex-wrap: nowrap;
 }
-
+.loginButton{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.signUpButton{
+  margin-left: 20px;
+}
 .database {
   border-radius: 5px !important;
   border-collapse: collapse;

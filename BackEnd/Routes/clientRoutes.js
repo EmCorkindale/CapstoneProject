@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const clientController = require("../Controllers/clientController");
 router.get("/getClients", clientController.getClients);
+router.get("/getSpecificClient/:clientID", clientController.getSpecificClient);
 router.get("/getMatchingClients", clientController.filterClients);
 router.post("/addSuburb", clientController.addSuburb);
 router.post("/addClients", clientController.addClient);

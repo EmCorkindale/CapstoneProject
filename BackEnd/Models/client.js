@@ -73,6 +73,10 @@ Client.init(
       allowNull: false,
       required: true,
     },
+    comments: {
+      type: DataTypes.STRING (400),
+      allowNull: true
+    },
     userID: {
       type: DataTypes.INTEGER,
       references: {

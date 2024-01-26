@@ -26,9 +26,9 @@ OpenHomeAttendee.init(
         key: "clientID",
       },
     },
-    notes: {
-      type: DataTypes.STRING (200),
-      allowNull: true,
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
     }
   },
   {

@@ -14,6 +14,27 @@ const getClients = (req, res) => {
     });
 };
 
+//Function to return a specific client in the users' client base by their clientID
+const getSpecificClient = (req, res) => {
+  const { clientID } = req.params;
+
+  Models.Client.findOne({
+    where: {
+      clientID: clientID,
+    },
+  })
+    .then(function (data) {
+      if (data) {
+        res.send({ result: 200, data: data });
+      } else {
+        res.status(404).send({ result: 404, error: "Client not found" });
+      }
+    })
+    .catch((err) => {
+      console.error("Error fetching specific client:", err);
+      res.status(500).send({ result: 500, error: "Internal Server Error" });
+    });
+};
 //Function to add new client to users' client base
 const addClient = async (req, res) => {
   const client = req.body;
@@ -42,7 +63,7 @@ const addSuburb = async (req, res) => {
   const suburb = req.body;
   const suburbCreate = await Models.Suburbs.create(suburb);
   res.send({ result: 200, client: suburbCreate });
-}
+};
 
 //function to filter clients based on external api search paramaters
 const filterClients = async (req, res) => {
@@ -82,7 +103,6 @@ const filterClients = async (req, res) => {
       suburbFilters.name = suburb;
     }
 
-    console.log("CLIENTFILTERS!", clientFilters)
     // Perform a join operation
     const clients = await Models.Client.findAll({
       where: clientFilters,
@@ -103,10 +123,9 @@ const filterClients = async (req, res) => {
   }
 };
 
-
-
 module.exports = {
   getClients,
+  getSpecificClient,
   addClient,
   deleteClient,
   updateClient,
