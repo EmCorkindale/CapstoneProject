@@ -17,7 +17,7 @@ import { OpenHomeRegister } from '../components/OpenHomeComponents/OpenHomeRegis
 export function OpenHomes() {
     const [properties, setProperties] = useState([]); // Rename to 'properties' for clarity
     const [deletedProperty, setDeletedProperty] = useState(null);
-    const navigate = useNavigate();  
+    const navigate = useNavigate();
 
     useEffect(() => {
         apiPropertyGet().then((data) => setProperties(data));
@@ -39,7 +39,6 @@ export function OpenHomes() {
     };
 
     const handleCardClick = (propertyID) => {
-        // Corrected: Use a different variable name for the property ID
         navigate(`/openHomeRegister/${propertyID}`);
     };
 
@@ -55,6 +54,9 @@ export function OpenHomes() {
                                 <Card.Img src={property.propertyImage} alt="Property" />
                             </Card.Body>
                             <CardFooter>
+                                {property.showOpenHomeRegister && (
+                                    <OpenHomeRegister propertyID={property.propertyID} />
+                                )}
                                 <Button onClick={() => handleCardClick(property.propertyID)}>
                                     Open Home Register
                                 </Button>

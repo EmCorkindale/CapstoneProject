@@ -3,15 +3,39 @@ const { DATE } = require("sequelize");
 const Models = require("../Models");
 
 //Function to return all people that attended an open home.
-const getOpenHomeAttendees = (req, res) => {
-  Models.OpenHomeAttendee.findAll({})
-    .then(function (data) {
-      res.send({ result: 200, data: data });
+const getOpenHomeAttendees = async (req, res) => {
+  try {
+    const propertyID = req.params.propertyID;
+
+    // Fetch OpenHomeAttendees based on propertyID
+    const openHomeAttendees = await Models.OpenHomeAttendee.findAll({
+      where: { propertyID },
+      include: [{
+        model: Models.Client,
+        required: true
+      }]
     })
-    .catch((err) => {
-      throw err;
+    const attendeeDetails = openHomeAttendees.map((attendee) => ({
+      clientID: attendee.clientID,
+      openHomeAttendeeID: attendee.openHomeAttendeeID,
+      firstName: attendee.client.firstName,
+      lastName: attendee.client.lastName,
+      emailAddress: attendee.client.emailAddress,
+      address: attendee.client.address,
+      phoneNumber: attendee.client.phoneNumber,
+      dateAttended: attendee.date,
+    }));
+    res.json({
+      result: 200,
+      attendeeDetails: attendeeDetails
     });
+    console.log(attendeeDetails);
+  } catch (err) {
+    console.error("Error fetching open home attendees:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
+
 
 //function to add add open home attendees and check for new clients / existing clients
 const addOpenHomeAttendees = async (req, res) => {

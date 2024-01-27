@@ -64,7 +64,7 @@ Client.init(
       required: true,
     },
     reqGarage: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       required: true,
     },
