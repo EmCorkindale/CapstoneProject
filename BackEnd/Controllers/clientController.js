@@ -1,19 +1,42 @@
 "use strict";
 const { query } = require("express");
 const Models = require("../Models");
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 
 //Function to return all clients in the users' client base
-const getClients = (req, res) => {
-  Models.Client.findAll({})
-    .then(function (data) {
-      res.send({ result: 200, data: data });
-    })
-    .catch((err) => {
-      throw err;
-    });
-};
+// const getClients = (req, res) => {
+//   const clientID = Models.Client.clientID;
 
+//   Models.Client.findAll({
+//     where: { clientID },
+//     include: [{
+//       model: Models.Suburbs,
+//       required: true
+//     }]
+//   })
+//     .then(function (data) {
+//       res.send({ result: 200, data: data });
+//     })
+//     .catch((err) => {
+//       throw err;
+//     });
+// };
+const getClients = async (req, res) => {
+  try {
+    const clientsData = await Models.Client.findAll({
+      include: [{
+        model: Models.Suburbs,
+        as: 'selectedSuburbs',
+        attributes: ['name'],
+      }],
+    });
+
+    res.send({ result: 200, data: clientsData });
+  } catch (err) {
+    console.error("Error fetching clients:", err);
+    res.status(500).send({ result: 500, error: "Internal Server Error" });
+  }
+};
 //Function to return a specific client in the users' client base by their clientID
 const getSpecificClient = (req, res) => {
   const { clientID } = req.params;
@@ -109,6 +132,7 @@ const filterClients = async (req, res) => {
       include: [
         {
           model: Models.Suburbs,
+          as: 'selectedSuburbs',
           where: suburbFilters,
         },
       ],

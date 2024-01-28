@@ -23,7 +23,7 @@ async function init() {
     Property.belongsTo(User, { foreignKey: "userID" });
 
     // Setting up the foreign key "clientID" in Suburbs table
-    Client.hasMany(Suburbs, { foreignKey: "clientID" });
+    Client.hasMany(Suburbs, {as: "selectedSuburbs",  foreignKey: "clientID" });
     Suburbs.belongsTo(Client, { foreignKey: "clientID" });
 
     // Setting up the foreign keys 'propertyID' and 'clientID' in the openHomeAttendees table

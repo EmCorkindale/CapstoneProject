@@ -19,7 +19,7 @@ export function ExpandedTableContents({ clientID }) {
 
   return (
     <div>
-      <p>Bedrooms: {client.reqBedsMin}-{client.reqBedsMax}, Bathrooms: {client.reqBaths}, Living: {client.reqLiving}, Garage: {client.reqGarage}, Suburb: {client.reqSuburb}, Buying or Selling: {client.buyingOrSelling},Price limit: {client.priceLimit}</p>
+      <p>Bedrooms: {client.reqBedsMin}-{client.reqBedsMax}, Bathrooms: {client.reqBaths}, Living: {client.reqLiving}, Garage: {client.reqGarage}, Suburbs: {client.selectedSuburbs.map((suburb)=>{return suburb.name}).join(", ")}, Buying or Selling: {client.buyingOrSelling},Price limit: {client.priceLimit}</p>
     </div>
   );
 }

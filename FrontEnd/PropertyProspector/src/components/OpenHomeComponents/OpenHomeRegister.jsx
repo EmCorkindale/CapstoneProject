@@ -92,16 +92,26 @@ export function OpenHomeRegister() {
                 // Handle the error, show an alert, or update your UI with an error message
             });
     };
-
+    const handleClose = () => {
+        // Close modal and fetch attendees again when the modal is closed
+        setShow(false);
+        apiGetOpenHomeAttendees(propertyID)
+            .then((result) => {
+                setAttendees(result.attendeeDetails);
+            })
+            .catch((error) => {
+                console.error("Error fetching attendees:", error);
+            });
+    };
 
     function returnToOpenHomes() {
         // Navigate back to Open Home page when the 'x' button is clicked
         navigate("/openHomes");
     }
-    function closeForm() {
-        // Close modale when the 'x' button is clicked
-        setShow(false);
-    }
+    // function closeForm() {
+    //     // Close modale when the 'x' button is clicked
+    //     setShow(false);
+    // }
 
     return (
         <>
@@ -137,10 +147,10 @@ export function OpenHomeRegister() {
                     ))}
                 </tbody>
             </Table>
-            <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+            <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)} className="openHomeForm">
                 <ModalHeader closeButton>
                     <ModalTitle>Register your details below</ModalTitle>
-                    <Button variant="outline" onClick={closeForm}>x</Button>
+                    <Button variant="outline" onClick={handleClose}>x</Button>
                 </ModalHeader>
                 <FormGroup controlId="firstName">
                     <FormLabel>First Name</FormLabel>

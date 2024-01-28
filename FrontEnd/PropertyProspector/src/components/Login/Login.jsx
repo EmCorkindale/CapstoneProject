@@ -17,7 +17,10 @@ function Login({ show, handleClose }) {
     console.error(error);
     setError('Login failed. Please check your credentials.')
   }
+
+  const resetError=()=>{setError("")}
   const handleSubmit = () => {
+    resetError()
     handleLogin(
       userEmail,
       userPassword,
