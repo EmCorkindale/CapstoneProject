@@ -11,6 +11,7 @@ import { apiPropertyDelete } from '../components/OpenHomeComponents/apiPropertyD
 import { SubmitNewProperty } from '../components/OpenHomeComponents/submitNewProperty';
 import { CardFooter } from 'react-bootstrap';
 import { OpenHomeRegister } from '../components/OpenHomeComponents/OpenHomeRegister';
+import { BottomSection } from '../components/Reusable/BottomSection';
 
 
 
@@ -43,35 +44,39 @@ export function OpenHomes() {
     };
 
     return (
-        <Container>
+        <>
+        <section className='openHomeHeading'>
             <h1 className='properties'>My Properties</h1>
-            <Row>
+            </section>
+            <section className='openHomeCardsContainer'>
+            <Row className="flex-grid">
                 {properties.map((property) => (
                     <Col key={property.propertyID}>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Body>
+                        <Card style={{ width: '18rem'}} className='propertyCard' >
+                            <Card.Body className='propertyCardBody'>
                                 <Card.Title>{property.propertyAddress}</Card.Title>
-                                <Card.Img src={property.propertyImage} alt="Property" />
+                                <Card.Img src={property.propertyImage} alt="Property" className='openHomeCardImage' style={{height: '150px', filter: "brightness(80%) contrast(90%) blur(0.75px)"}}/>
                             </Card.Body>
-                            <CardFooter>
+                            <CardFooter className='d-flex justify-content-between'>
                                 {property.showOpenHomeRegister && (
                                     <OpenHomeRegister propertyID={property.propertyID} />
                                 )}
-                                <Button onClick={() => handleCardClick(property.propertyID)}>
+                                <button role="button" onClick={() => handleCardClick(property.propertyID)} className='openHomeRegisterButton'>
                                     Open Home Register
-                                </Button>
-                                <Button
-                                    variant="danger"
-                                    onClick={() => handleDelete(property.propertyID)}
-                                >
-                                    Delete Property
-                                </Button>
+                                </button>
+                                <button  role="button" onClick={() => handleDelete(property.propertyID)} className='openHomeDeleteButton'>
+                                 Delete Property
+                                </button>
                             </CardFooter>
                         </Card>
                     </Col>
                 ))}
+                <Col>
                 <SubmitNewProperty handleAddProperty={handleAddProperty} />
-            </Row>
-        </Container>
+                </Col>
+                </Row>
+        </section>
+        <BottomSection/>
+        </>
     );
 }

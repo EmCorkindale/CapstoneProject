@@ -44,7 +44,7 @@ export function SubmitNewProperty({handleAddProperty}) {
 
   return (
     <>
-      <Col className='addPropertyCard' onClick={() => setSmShow(true)}>
+    <div className='addPropertyCard' onClick={() => setSmShow(true)}>
         <Card style={{ width: '18rem', color: '#656762', borderColor: '#656762' }}>
           <Card.Body>
             <Card.Title>Add new property</Card.Title>
@@ -53,12 +53,13 @@ export function SubmitNewProperty({handleAddProperty}) {
             </Card.Text>
           </Card.Body>
         </Card>
-      </Col>
+      </div>
       <Modal
         size="sm"
         show={smShow}
         onHide={() => setSmShow(false)}
         aria-labelledby="example-modal-sizes-title-sm"
+        className='AddPropertyModal'
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-sm">
@@ -67,6 +68,7 @@ export function SubmitNewProperty({handleAddProperty}) {
               value={propertyAddress}
               placeholder="Enter property address"
               onChange={(e) => setAddress(e.target.value)}
+              className="addPropertyAddress"
             />
           </Modal.Title>
         </Modal.Header>
@@ -76,15 +78,17 @@ export function SubmitNewProperty({handleAddProperty}) {
             placeholder="Add image URL"
             value={propertyImage}
             onChange={(e) => setImage(e.target.value)}
+            className="addPropertyImage"
           />
         </Modal.Body>
         <Modal.Footer>
           {error && <p style={{ color: 'red' }}>{error}</p>}
-          <Button variant="primary" onClick={onClickFunc}>
+          <button role='button' variant="primary" onClick={onClickFunc} className='submitPropertyButton'>
             Add Property
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
+    
     </>
   );
 }
