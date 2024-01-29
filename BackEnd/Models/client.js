@@ -29,7 +29,7 @@ Client.init(
       unique: true,
     },
     phoneNumber: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       required: true,
     },
@@ -43,7 +43,12 @@ Client.init(
       allowNull: false,
       required: true,
     },
-    reqBeds: {
+    reqBedsMin: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      required: true,
+    },
+    reqBedsMax: {
       type: DataTypes.INTEGER,
       allowNull: false,
       required: true,
@@ -59,14 +64,18 @@ Client.init(
       required: true,
     },
     reqGarage: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       required: true,
     },
-    reqSuburb: {
-      type: DataTypes.STRING(100),
+    priceLimit: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       required: true,
+    },
+    comments: {
+      type: DataTypes.STRING (400),
+      allowNull: true
     },
     userID: {
       type: DataTypes.INTEGER,
@@ -85,4 +94,3 @@ Client.init(
 );
 
 module.exports = Client;
-

@@ -2,42 +2,38 @@ const { DataTypes, Model } = require("sequelize");
 let dbConnect = require("../dbConnect");
 const sequelizeInstance = dbConnect.Sequelize;
 
-class OpenHomeAttendee extends Model {}
+class Suburbs extends Model {}
 
-OpenHomeAttendee.init(
+Suburbs.init(
+
   {
-    openHomeAttendeeID: {
+    suburbID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
     },
-    propertyID: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "properties",
-        key: "propertyID",
-      },
-    },
     clientID: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: "clients",
         key: "clientID",
-      },
-    },
-    date: {
-      type: DataTypes.DATE,
+    }},
+    name: {
+      type: DataTypes.STRING(50),
       allowNull: false,
-    }
+      required: true,
+    },
+    
+
   },
   {
     sequelize: sequelizeInstance,
-    modelName: "openHomeAttendees", // use lowercase plural format
+    modelName: "suburbs", // use lowercase plural format
     timestamps: false,
     freezeTableName: true,
   }
 );
 
-module.exports = OpenHomeAttendee;
- 
+module.exports = Suburbs;

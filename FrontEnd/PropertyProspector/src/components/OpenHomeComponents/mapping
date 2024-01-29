@@ -1,0 +1,16 @@
+input Client's details - firstName, lastName, emailAddress, phoneNumber, address, buyingOrSelling, reqBedsMin, reqBedsMax, reqBaths, reqLiving, reqGarage, priceLimit, suburb names, property id
+comment field for User to enter additional details
+
+each person will have an open home attendee id and a client id (if a new client it will be a new id)
+
+each register will be assigned to a property by the property id (this is how we will know ow each open home attendee attended which property)
+
+// function to look up client by email address
+// create client in database
+// create the entry in the join table that associates propery with client with date
+
+
+// look up client by email address to see if they exist then (if statement, if client exists do nothing if they don't create them), then create entry in join table to say theis client id visited this property id at this point in time. 
+
+
+front end

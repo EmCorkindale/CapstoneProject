@@ -3,6 +3,7 @@ import './App.css'
 import NavBar from './components/NavBar/navBar'
 import AppRoutes from './routes/appRoutes'
 import { UserProvider } from './contexts/userContext'
+import { ThemeProvider } from 'react-bootstrap'
 
 
 function App() {
@@ -10,12 +11,17 @@ function App() {
 
   return (
     <>
-
-      <UserProvider>
-        <NavBar />
-        <AppRoutes />
-    </UserProvider >
-
+      <ThemeProvider
+        breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
+        minBreakpoint="xxs"
+      >
+        <UserProvider>
+          <div className="container-fluid">
+            <NavBar />
+            <AppRoutes />
+          </div>
+        </UserProvider >
+      </ThemeProvider>
     </>
   )
 }
