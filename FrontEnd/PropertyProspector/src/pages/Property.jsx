@@ -41,13 +41,21 @@ export function Property() {
             <Container fluid='md'>
                 <h1 className="currentListings">Current Listings</h1>
                 <h2 className="searchForProperty">Search for Property</h2>
-                    <div className="searchBar">
+                <div className="searchBar">
+                    <div>
                         <RegionSelect selectedRegion={selectedRegion} onRegionSelected={setSelectedRegion} clearSearch={clearSearch} />
-                        <DistrictSelect selectedRegion={selectedRegion} selectedDistrict={selectedDistrict} onDistrictSelected={setSelectedDistrict} clearSearch={clearSearch} />
-                        <SuburbSelect selectedRegion={selectedRegion} selectedDistrict={selectedDistrict} selectedSuburbs={selectedSuburbs} onSuburbsSelected={setSelectedSuburbs} clearSearch={clearSearch}/>
-                        <button className="search" onClick={performSearch}>Search</button>
-                         <button className="clear" onClick={clearSearch}>Clear</button>
                     </div>
+                    <div>
+                        <DistrictSelect selectedRegion={selectedRegion} selectedDistrict={selectedDistrict} onDistrictSelected={setSelectedDistrict} clearSearch={clearSearch} />
+                    </div>
+                    <div>
+                        <SuburbSelect selectedRegion={selectedRegion} selectedDistrict={selectedDistrict} selectedSuburbs={selectedSuburbs} onSuburbsSelected={setSelectedSuburbs} clearSearch={clearSearch} />
+                    </div>
+                    <div>
+                        <button className="search" onClick={performSearch}>Search</button>
+                        <button className="clear" onClick={clearSearch}>x</button>
+                    </div>
+                </div>
                 <div className="expandedSearch">
                     <ExpandedSearch expandedOptions={expandedOptions} onExpandedOptionsChanged={onExpandedOptionsChanged} clearSearch={clearSearch} />
                 </div>

@@ -45,38 +45,38 @@ export function OpenHomes() {
 
     return (
         <>
-        <section className='openHomeHeading'>
-            <h1 className='properties'>My Properties</h1>
-            </section>
+            <div className='openHomeHeading'>
+                <h1 className='properties'>My Properties</h1>
+            </div>
             <section className='openHomeCardsContainer'>
-            <Row className="flex-grid">
-                {properties.map((property) => (
-                    <Col key={property.propertyID}>
-                        <Card style={{ width: '18rem'}} className='propertyCard' >
-                            <Card.Body className='propertyCardBody'>
-                                <Card.Title>{property.propertyAddress}</Card.Title>
-                                <Card.Img src={property.propertyImage} alt="Property" className='openHomeCardImage' style={{height: '150px', filter: "brightness(80%) contrast(90%) blur(0.75px)"}}/>
-                            </Card.Body>
-                            <CardFooter className='d-flex justify-content-between'>
-                                {property.showOpenHomeRegister && (
-                                    <OpenHomeRegister propertyID={property.propertyID} />
-                                )}
-                                <button role="button" onClick={() => handleCardClick(property.propertyID)} className='openHomeRegisterButton'>
-                                    Open Home Register
-                                </button>
-                                <button  role="button" onClick={() => handleDelete(property.propertyID)} className='openHomeDeleteButton'>
-                                 Delete Property
-                                </button>
-                            </CardFooter>
-                        </Card>
+                <Row className="flex-grid">
+                    {properties.map((property) => (
+                        <Col key={property.propertyID}>
+                            <Card style={{ width: '18rem' }} className='propertyCard' >
+                                <Card.Body className='propertyCardBody'>
+                                    <Card.Title>{property.propertyAddress}</Card.Title>
+                                    <Card.Img src={property.propertyImage} alt="Property" className='openHomeCardImage' style={{ height: '150px', filter: "brightness(80%) contrast(90%) blur(0.75px)" }} />
+                                </Card.Body>
+                                <CardFooter className='d-flex justify-content-between'>
+                                    {property.showOpenHomeRegister && (
+                                        <OpenHomeRegister propertyID={property.propertyID} />
+                                    )}
+                                    <button role="button" onClick={() => handleCardClick(property.propertyID)} className='openHomeRegisterButton'>
+                                        Open Home Register
+                                    </button>
+                                    <button role="button" onClick={() => handleDelete(property.propertyID)} className='openHomeDeleteButton'>
+                                        Delete Property
+                                    </button>
+                                </CardFooter>
+                            </Card>
+                        </Col>
+                    ))}
+                    <Col>
+                        <SubmitNewProperty handleAddProperty={handleAddProperty} />
                     </Col>
-                ))}
-                <Col>
-                <SubmitNewProperty handleAddProperty={handleAddProperty} />
-                </Col>
                 </Row>
-        </section>
-        <BottomSection/>
+            </section>
+            <BottomSection />
         </>
     );
 }

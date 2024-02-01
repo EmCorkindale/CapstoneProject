@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { getSuburbs } from './getApiData';
 
-export default function SuburbSelected({ selectedRegion, selectedDistrict, selectedSuburbs, onSuburbsSelected, clearSearch }) {
+export default function SuburbSelected({ selectedRegion, selectedDistrict, selectedSuburbs, onSuburbsSelected }) {
   const [suburbs, setSuburbs] = useState([]);
 
   useEffect(() => {

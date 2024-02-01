@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -7,7 +7,8 @@ import { Button } from 'react-bootstrap';
 import Login from '../Login/Login';
 import Register from '../SignUp/Register';
 import { useUser } from '../../contexts/userContext';
-import { NavLink as ReactRouterNavLink, useNavigate, useLocation } from 'react-router-dom';
+import { NavLink as ReactRouterNavLink } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function NavBar() {
     const [showLogin, setShowLogin] = useState(false);
@@ -15,9 +16,8 @@ export default function NavBar() {
     const [showRegister, setShowRegister] = useState(false);
     const handleCloseRegister = () => setShowRegister(false);
     const { user, handleLogout } = useUser();
-    const location = useLocation(); 
+    const location = useLocation();
     const navigate = useNavigate();
-    
 
     return (
         <>
@@ -32,7 +32,7 @@ export default function NavBar() {
                                     My Database
                                 </ReactRouterNavLink>
                             ) : (
-                                <NavLink style={{ visibility: 'hidden' }}>My Database</NavLink>
+                                <ReactRouterNavLink style={{ visibility: 'hidden' }}>My Database</ReactRouterNavLink>
                             )}
 
                             {user ? (
@@ -40,7 +40,7 @@ export default function NavBar() {
                                     Open Homes
                                 </ReactRouterNavLink>
                             ) : (
-                                <NavLink style={{ visibility: 'hidden' }}>Open Homes</NavLink>
+                                <ReactRouterNavLink style={{ visibility: 'hidden' }}>Open Homes</ReactRouterNavLink>
                             )}
 
                             {user ? (
@@ -48,14 +48,11 @@ export default function NavBar() {
                                     Property
                                 </ReactRouterNavLink>
                             ) : (
-                                <NavLink style={{ visibility: 'hidden' }}>Property</NavLink>
+                                <ReactRouterNavLink style={{ visibility: 'hidden' }}>Property</ReactRouterNavLink>
                             )}
 
                             {user ? (
                                 <NavDropdown title={`Welcome ${user.username}`} className='ml-auto'>
-                                    <ReactRouterNavLink to="#myAccount" className={location.pathname === '/myAccount' ? 'bold-link' : ''}>
-                                        My Account
-                                    </ReactRouterNavLink>
                                     <NavDropdown.Item onClick={handleLogout}>Sign Out</NavDropdown.Item>
                                 </NavDropdown>
                             ) : (

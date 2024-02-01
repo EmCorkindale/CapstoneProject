@@ -3,6 +3,7 @@ import { FormCheck } from 'react-bootstrap';
 import { apiGetClients } from '../components/ClientDatabase/apiGetClients';
 import { BottomSection } from '../components/Reusable/BottomSection';
 import HoverPropertyRequirements from '../components/ClientDatabase/HoverPropertyRequirements';
+import { AddClients } from '../components/ClientDatabase/addClients';
 
 export function ClientDatabase() {
   const [clients, setClients] = useState([]);
@@ -39,6 +40,8 @@ export function ClientDatabase() {
     <>
       <div className='databaseHeading'>
         <h1>My Database</h1>
+      </div>
+      <div>
       </div>
       <section className='databaseTableContainer'>
         <table className='database'>

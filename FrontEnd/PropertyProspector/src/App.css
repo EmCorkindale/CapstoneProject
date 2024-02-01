@@ -194,14 +194,16 @@
   justify-content: center;
 }
 
-.openHomeHeading {
-  display: flex;
-  justify-content: center;
+.openHomeHeading h1{
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
-  font-style: normal;
-  font-size: 1.5em;
-  color: #656762;
+  font-size: 2em;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 10px;
+  animation: fadeIn 2s ease-out;
 }
 
 .openHomeCardsContainer {
@@ -219,6 +221,7 @@
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
   color: #656762;
+  animation: fadeIn 2s ease-out;
   ;
 }
 
@@ -329,6 +332,7 @@
   margin: 0 auto;
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
+  animation: fadeIn 2s ease-out;
 }
 
 .addPropertyCard:hover {
@@ -690,7 +694,7 @@
   background-color: #E5E0DC;
 } */
 
- /* .form-fields-container {
+/* .form-fields-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -765,8 +769,8 @@
   display: flex;
   justify-content: flex-start;
   margin: 10px;
-} */ */
-.submitOpenHomeRegisterForm{
+} */
+*/ .submitOpenHomeRegisterForm {
   align-self: center;
   background-color: #fff;
   background-image: none;
@@ -799,6 +803,7 @@
   margin: 10px;
   background-color: #E5E0DC;
 }
+
 .submitOpenHomeRegisterForm:hover {
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
   transform: translate3d(0, 2px, 0);
@@ -807,6 +812,7 @@
 .submitOpenHomeRegisterForm:focus {
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
 }
+
 /* .form-field {
   flex: 1;
   margin-right: 100px; 
@@ -815,53 +821,7 @@
 }  */
 
 /* Property Search */
-.regionDropdown{
-    align-self: center;
-    background-color: #fff;
-    background-image: none;
-    background-position: 0 90%;
-    background-repeat: repeat no-repeat;
-    background-size: 4px 3px;
-    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #656762;
-    box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
-    box-sizing: border-box;
-    color: #656762;
-    cursor: pointer;
-    display: inline-block;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 300;
-    font-size: 1rem;
-    line-height: 13px;
-    outline: none;
-    padding: .75rem;
-    text-decoration: none;
-    transition: all 235ms ease-in-out;
-    border-bottom-left-radius: 15px 255px;
-    border-bottom-right-radius: 225px 15px;
-    border-top-left-radius: 255px 15px;
-    border-top-right-radius: 15px 225px;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    margin: 10px;
-  }
-  .regionDropdown:hover {
-    box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
-    transform: translate3d(0, 2px, 0);
-    background-color: #B3B1A2;
-  }
-  
-  .regionDropdown:focus {
-    box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
-    background-color: #B3B1A2;
-}
-.regionMenu{
-  font-family: 'Poppins', sans-serif;
-}
-.districtDropdown{
+.regionDropdown {
   align-self: center;
   background-color: #fff;
   background-image: none;
@@ -894,6 +854,56 @@
   touch-action: manipulation;
   margin: 10px;
 }
+
+.regionDropdown:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+  background-color: #B3B1A2;
+}
+
+.regionDropdown:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+  background-color: #B3B1A2;
+}
+
+.regionMenu {
+  font-family: 'Poppins', sans-serif;
+}
+
+.districtDropdown {
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #656762;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #656762;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 13px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 10px;
+}
+
 .districtDropdown:hover {
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
   transform: translate3d(0, 2px, 0);
@@ -904,10 +914,12 @@
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
   background-color: #B3B1A2;
 }
-.districtMenu{
-font-family: 'Poppins', sans-serif;
+
+.districtMenu {
+  font-family: 'Poppins', sans-serif;
 }
-.suburbDropdown{
+
+.suburbDropdown {
   align-self: center;
   background-color: #fff;
   background-image: none;
@@ -939,6 +951,16 @@ font-family: 'Poppins', sans-serif;
   -webkit-user-select: none;
   touch-action: manipulation;
   margin: 10px;
+  overflow-x: clip;
+  max-width: 400px;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: all 235ms ease-in-out;
+}
+
+.currentListings{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
 
 }
 .suburbDropdown:hover {
@@ -951,10 +973,12 @@ font-family: 'Poppins', sans-serif;
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
   background-color: #B3B1A2;
 }
-.suburbMenu{
-font-family: 'Poppins', sans-serif;
+
+.suburbMenu {
+  font-family: 'Poppins', sans-serif;
 }
-.search{
+
+.search {
   align-self: center;
   background-color: #fff;
   background-image: none;
@@ -989,6 +1013,7 @@ font-family: 'Poppins', sans-serif;
   width: 200px;
 
 }
+
 .search:hover {
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
   transform: translate3d(0, 2px, 0);
@@ -999,7 +1024,8 @@ font-family: 'Poppins', sans-serif;
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
   background-color: #B3B1A2;
 }
-.clear{
+
+.clear {
   align-self: center;
   background-color: #fff;
   background-image: none;
@@ -1033,6 +1059,7 @@ font-family: 'Poppins', sans-serif;
   margin: 10px;
 
 }
+
 .clear:hover {
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
   transform: translate3d(0, 2px, 0);
@@ -1043,12 +1070,18 @@ font-family: 'Poppins', sans-serif;
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
   background-color: #B3B1A2;
 }
+
 .searchBar {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
+  animation: fadeIn 2s ease-out;
 }
-.expandeDropdown{
+.searchBar div{
+  min-width: 200px;
+}
+
+.expandeDropdown {
   align-self: center;
   background-color: #fff;
   background-image: none;
@@ -1083,6 +1116,7 @@ font-family: 'Poppins', sans-serif;
   width: 100px;
 
 }
+
 .expandeDropdown:hover {
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
   transform: translate3d(0, 2px, 0);
@@ -1093,11 +1127,120 @@ font-family: 'Poppins', sans-serif;
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
   background-color: #B3B1A2;
 }
-.expandedOptions{
+
+.expandedOptions {
+  font-family: 'Poppins', sans-serif;
+  animation: fadeIn 2s ease-out;
+}
+
+.matchingPropertyCard {
+  margin: 0 auto;
+  margin-top: 40px;
+  font-family: 'Poppins', sans-serif;
+  animation: fadeIn 2s ease-out;
+  display: flex;
+  flex-direction: column;
+  filter: brightness(0.9);
+  cursor: pointer;
+}
+
+.card-img{
+  height: 190px;
+  margin: auto;
+}
+
+.propertyInfo {
+  max-width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.propertyInfo p {
+  display: inline;
+  margin-right: 10px;
   font-family: 'Poppins', sans-serif;
 }
+
+.matchingPropertyCard:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+  transform: scale(1.05);
+  filter: brightness(01);
+}
+
+.matchingPropertyCardBody {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+}
+.matchingPropertyCardFooter {
+  text-align: center;
+  font-size: .95em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 250px;
+}
+
+.smallIcon {
+  margin-right: 5px;
+  text-align: center;
+  align-self: center;
+}
+
+.databaseMatchButton {
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #656762;
+  box-shadow: rgba(0, 0, 0, .2) 0px 5px 5px -5px;
+  box-sizing: border-box;
+  color: #656762;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: .75rem;
+  line-height: 13px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-top: auto; /* Push the button to the bottom of the container */
+  margin-bottom: 20px; /* Add margin for separation */
+}
+
+.databaseMatchButton:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+  background-color: #B3B1A2;
+}
+
+.databaseMatchButton:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+  background-color: #B3B1A2;
+}
+
+
 .currentListings {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 2em;
   display: flex;
   justify-content: right;
   padding: 20px;
@@ -1105,11 +1248,14 @@ font-family: 'Poppins', sans-serif;
 }
 
 .searchForProperty {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 2em;
+  margin: 0 auto;
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  padding: 20px;
-  margin-right: 45px;
+  margin-bottom: 10px;
 }
 
 .expandedSearch {
@@ -1118,13 +1264,30 @@ font-family: 'Poppins', sans-serif;
   justify-content: space-between;
   align-items: center;
   align-self: center;
-
   margin-top: 2rem;
 }
-
+.matchingClientsRequiremtnsExpanded{
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.biggerImage{
+  max-height: 200px;
+}
+.expandedPropertyModal{
+  display: flex;
+  justify-content: space-around;
+}
+.expandedClientRequirementsModalFooter{
+  display: flex;
+  justify-content: space-around;
+}
+/* 
 .openHomeForm {
   background-color: #E5E0DC;
-}
+} */
 
 /* Client database styling */
 
@@ -1147,6 +1310,7 @@ font-family: 'Poppins', sans-serif;
   margin-top: 20px;
   color: #656762;
   font-family: 'Poppins', sans-serif;
+  animation: fadeIn 2s ease-out;
 }
 
 .databaseHeadings {
@@ -1190,6 +1354,7 @@ font-family: 'Poppins', sans-serif;
   text-align: center;
   margin: 0 auto;
   max-width: 400px;
+  animation: fadeIn 2s ease-out;
 }
 
 .databaseHeading h1 {
