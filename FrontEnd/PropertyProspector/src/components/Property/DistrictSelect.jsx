@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { getDistricts } from './getApiData';
 
-export default function DistrictSelect({ selectedRegion, selectedDistrict, onDistrictSelected }) {
+export default function DistrictSelect({ selectedRegion, selectedDistrict, onDistrictSelected, clearSearch }) {
   const [districts, setDistricts] = useState(null);
 
   useEffect(() => {
@@ -19,10 +19,10 @@ export default function DistrictSelect({ selectedRegion, selectedDistrict, onDis
 
   return (
     <Dropdown>
-       <Dropdown.Toggle variant="success" id="dropdown-basic">
+       <Dropdown.Toggle id="dropdown-basic" className='districtDropdown'>
         {selectedDistrict ? selectedDistrict.Name : 'Select District'}
       </Dropdown.Toggle>
-      <Dropdown.Menu>
+      <Dropdown.Menu className='districtMenu'>
         {districts && districts.map((districtItem) => (
           <Dropdown.Item
             key={districtItem.DistrictId}

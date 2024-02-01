@@ -116,6 +116,7 @@
 .logo {
   max-height: 100px;
 }
+
 .login {
   display: flex;
   justify-content: space-between;
@@ -131,6 +132,7 @@
 .signUpButton {
   margin-left: 20px;
 }
+
 /* Bottom component styling */
 @keyframes fadeIn {
   from {
@@ -197,6 +199,8 @@
   justify-content: center;
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
+  font-style: normal;
+  font-size: 1.5em;
   color: #656762;
 }
 
@@ -209,20 +213,26 @@
   color: #656762;
   border: solid, 1em, #656762;
 }
-.propertyCard{
+
+.propertyCard {
   border: 1px solid #656762;
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
-  color: #656762;;
+  color: #656762;
+  ;
 }
+
 .propertyCardBody {
   transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
 }
 
 .propertyCardBody:hover {
-  transform: scale(1.05); /* Scale the card by 5% on hover */
-  filter: brightness(0.9); /* Darken the card by 10% on hover */
+  transform: scale(1.05);
+  /* Scale the card by 5% on hover */
+  filter: brightness(0.9);
+  /* Darken the card by 10% on hover */
 }
+
 .openHomeRegisterButton {
   align-self: center;
   background-color: #fff;
@@ -305,7 +315,7 @@
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
 }
 
-.addPropertyCard div {
+.addPropertyCard {
   display: flex;
   display: flex;
   flex-wrap: nowrap;
@@ -317,9 +327,19 @@
   color: #656762;
   height: 286px;
   margin: 0 auto;
-
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
 }
-.addPropertyModal{
+
+.addPropertyCard:hover {
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+  transform: scale(1.05);
+  /* Scale the card by 5% on hover */
+  filter: brightness(0.9);
+  /* Darken the card by 10% on hover */
+}
+
+.addPropertyModal {
   border-bottom-left-radius: 15px 255px;
   border-bottom-right-radius: 225px 15px;
   border-top-left-radius: 255px 15px;
@@ -330,7 +350,8 @@
   border-color: #656762;
   box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
 }
-.addPropertyAddress{
+
+.addPropertyAddress {
   align-self: center;
   background-color: #fff;
   background-image: none;
@@ -362,6 +383,7 @@
   -webkit-user-select: none;
   touch-action: manipulation;
 }
+
 .addPropertyAddress:hover {
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
   transform: translate3d(0, 2px, 0);
@@ -370,7 +392,8 @@
 .addPropertyAddress:focus {
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
 }
-.addPropertyImage{
+
+.addPropertyImage {
   align-self: center;
   background-color: #fff;
   background-image: none;
@@ -402,6 +425,7 @@
   -webkit-user-select: none;
   touch-action: manipulation;
 }
+
 .addPropertyImage:hover {
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
   transform: translate3d(0, 2px, 0);
@@ -413,9 +437,21 @@
 
 .addPropertyCard img {
   min-height: 50px;
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+  transform: scale(1.05);
+  /* Scale the card by 5% on hover */
+  filter: brightness(0.9);
+  /* Darken the card by 10% on hover */
+  cursor: pointer;
+  margin: 0 auto;
 }
 
-.submitPropertyButton{
+.addPropertyCard img:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.submitPropertyButton {
   align-self: center;
   background-color: #fff;
   background-image: none;
@@ -488,32 +524,578 @@
   touch-action: manipulation;
 }
 
+.openHomeRegister {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  max-width: 80%;
+  margin: 0 auto;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 10px;
+}
 
-/* .database {
-  border-radius: 5px !important;
+.openHomeRegisterTable {
+  width: 100%;
   border-collapse: collapse;
+  border-radius: 10px;
   overflow: hidden;
+  margin-top: 20px;
+  color: #656762;
+  font-family: 'Poppins', sans-serif;
+}
+
+.openHomeRegisterTableHeadings {
+  background-color: #656762;
+  color: #E5E0DC;
+}
+
+.openHomeRegisterTable th,
+.openHomeRegisterTable td {
+  border: 1px solid #656762;
+  padding: 12px;
+  text-align: left;
+}
+
+.OpenHomeEvenRow {
+  background-color: #f5f5f5;
+}
+
+.OpenHomeOddRow {
+  background-color: #f5f5f5;
+}
+
+.openHomeRegisterHeading h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 2em;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.openHomeRegisterHeading {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 15px;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.openHomeAttendeesButtons {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.addOpenHomeAttendeesButton {
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #656762;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 13px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 10px;
+}
+
+.AddOpenHomeAttendeesButton:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.AddOpenHomeAttendeesButton:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+
+.returnToOpenHomesButton {
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #656762;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 13px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 10px;
+}
+
+.returnToOpenHomesButton:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.returnToOpenHomesButton:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+
+/* .openHomeForm {
+  background-color: #E5E0DC;
+  font-family: 'Poppins', sans-serif;
 } */
 
-button {
-  background-color: transparent;
-  color: #656762;
-  gap: 8px;
-  border: none;
-  cursor: pointer;
-}
-
-.button-td {
-  padding: 0 10px;
-  width: 2px;
-}
-
-.basicSearch {
+/* .firstAndLastName {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  margin: 10px;
+  background-color: #E5E0DC;
+} */
+
+ /* .form-fields-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  background-color: #E5E0DC;
+}  */
+/* .contactContainer div {
+  min-width: 400px;  
+  background-color: #E5E0DC;
+} */
+/* .contactContainer{
+  border: 2px solid #656762;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  background-color: #E5E0DC;
+  
+}
+.contactContainerP {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 0;
+  margin-top: 10px;
+  margin-left: 10px;
+  background-color: #E5E0DC;
+} */
+
+/* 
+.contactDetails {
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px;
+  background-color: #E5E0DC;
+} */
+
+/* .propertyRequirementsP {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 0;
+  margin-top: 10px;
+  background-color: #E5E0DC; margin-left: 10px;
 }
 
+
+.propertyRequirements {
+  border: 2px solid #656762;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  margin: 10px 20% 10px 20%;
+  background-color: #E5E0DC;
+}
+/*  */
+/* .buyingStatusAndBeds {
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px;
+  background-color: #E5E0DC;
+}
+
+.bathsLivingAndGarage {
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px;
+}
+
+.priceAndSuburb {
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px;
+} */ */
+.submitOpenHomeRegisterForm{
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #656762;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 13px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 10px;
+  background-color: #E5E0DC;
+}
+.submitOpenHomeRegisterForm:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.submitOpenHomeRegisterForm:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+/* .form-field {
+  flex: 1;
+  margin-right: 100px; 
+  margin-bottom: 10px; 
+  width: calc(50% - 5px);
+}  */
+
+/* Property Search */
+.regionDropdown{
+    align-self: center;
+    background-color: #fff;
+    background-image: none;
+    background-position: 0 90%;
+    background-repeat: repeat no-repeat;
+    background-size: 4px 3px;
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #656762;
+    box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+    box-sizing: border-box;
+    color: #656762;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 13px;
+    outline: none;
+    padding: .75rem;
+    text-decoration: none;
+    transition: all 235ms ease-in-out;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 10px;
+  }
+  .regionDropdown:hover {
+    box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+    transform: translate3d(0, 2px, 0);
+    background-color: #B3B1A2;
+  }
+  
+  .regionDropdown:focus {
+    box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+    background-color: #B3B1A2;
+}
+.regionMenu{
+  font-family: 'Poppins', sans-serif;
+}
+.districtDropdown{
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #656762;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #656762;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 13px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 10px;
+}
+.districtDropdown:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+  background-color: #B3B1A2;
+}
+
+.districtDropdown:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+  background-color: #B3B1A2;
+}
+.districtMenu{
+font-family: 'Poppins', sans-serif;
+}
+.suburbDropdown{
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #656762;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #656762;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 13px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 10px;
+
+}
+.suburbDropdown:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+  background-color: #B3B1A2;
+}
+
+.suburbDropdown:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+  background-color: #B3B1A2;
+}
+.suburbMenu{
+font-family: 'Poppins', sans-serif;
+}
+.search{
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #656762;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #656762;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 13px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 10px;
+  width: 200px;
+
+}
+.search:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+  background-color: #B3B1A2;
+}
+
+.search:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+  background-color: #B3B1A2;
+}
+.clear{
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #656762;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #656762;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 13px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 10px;
+
+}
+.clear:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+  background-color: #B3B1A2;
+}
+
+.clear:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+  background-color: #B3B1A2;
+}
+.searchBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.expandeDropdown{
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #656762;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #656762;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 13px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 10px;
+  width: 100px;
+
+}
+.expandeDropdown:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+  background-color: #B3B1A2;
+}
+
+.expandeDropdown:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+  background-color: #B3B1A2;
+}
+.expandedOptions{
+  font-family: 'Poppins', sans-serif;
+}
 .currentListings {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   display: flex;

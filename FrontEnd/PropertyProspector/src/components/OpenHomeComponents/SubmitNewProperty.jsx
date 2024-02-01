@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { apiPropertyPost } from './apiPropertyPost';
 import { apiPropertyGet } from './apiPropertyGet';
-import { Form, Col } from 'react-bootstrap';
+import { Form, Col, CardFooter } from 'react-bootstrap';
 
 
 export function SubmitNewProperty({handleAddProperty}) {
@@ -45,13 +45,13 @@ export function SubmitNewProperty({handleAddProperty}) {
   return (
     <>
     <div className='addPropertyCard' onClick={() => setSmShow(true)}>
-        <Card style={{ width: '18rem', color: '#656762', borderColor: '#656762' }}>
+        <Card style={{ width: '18rem', height:'310px', color: '#656762', borderColor: '#656762' }}>
           <Card.Body>
             <Card.Title>Add new property</Card.Title>
-            <Card.Text>
-              <img src={'./src/assets/add.svg'} alt="Add Property" />
-            </Card.Text>
           </Card.Body>
+          <CardFooter>
+          <img src={'./src/assets/add.svg'} alt="Add Property" />
+          </CardFooter>
         </Card>
       </div>
       <Modal
@@ -59,7 +59,7 @@ export function SubmitNewProperty({handleAddProperty}) {
         show={smShow}
         onHide={() => setSmShow(false)}
         aria-labelledby="example-modal-sizes-title-sm"
-        className='AddPropertyModal'
+        className='addPropertyModal'
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-sm">
