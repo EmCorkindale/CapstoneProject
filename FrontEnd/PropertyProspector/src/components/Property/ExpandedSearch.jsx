@@ -50,10 +50,10 @@ export function ExpandedSearch({ expandedOptions = {}, onExpandedOptionsChanged,
         <>
             <h3 className="price">Price</h3>
             <Dropdown>
-                <Dropdown.Toggle className="expandeDropdown" data-bs-toggle="dropdown" data-bs-auto-close="*">
+                <Dropdown.Toggle className="expandeDropdown" data-bs-toggle="dropdown" data-bs-auto-close="*" >
                     {expandedOptions.priceLow ?? 'Any'}
                 </Dropdown.Toggle>
-                <Dropdown.Menu>
+                <Dropdown.Menu  style={{maxHeight: '300px', overflowY: 'auto'}}>
                     {priceRangeLow.map((price) => (
                         <Dropdown.Item  className="expandedOptions" value={price.value} key={price.value} as="button" onClick={() => handlePriceRangeLowSelect(price.value)}>
                             {price.display}
@@ -66,7 +66,7 @@ export function ExpandedSearch({ expandedOptions = {}, onExpandedOptionsChanged,
                 <Dropdown.Toggle className="expandeDropdown" data-bs-toggle="dropdown" data-bs-auto-close="*">
                     {expandedOptions.priceHigh ?? 'Any'}
                 </Dropdown.Toggle>
-                <Dropdown.Menu>
+                <Dropdown.Menu  style={{maxHeight: '300px', overflowY: 'auto'}}>
                     {priceRangeHigh.map((price) => (
                         <Dropdown.Item className="expandedOptions" value={price.value} key={price.value} as="button" onClick={() => handlePriceRangeHighSelect(price.value)}>
                             {price.display}
@@ -80,7 +80,7 @@ export function ExpandedSearch({ expandedOptions = {}, onExpandedOptionsChanged,
                 <Dropdown.Toggle className="expandeDropdown" data-bs-toggle="dropdown" data-bs-auto-close="*">
                     {expandedOptions.bedroomsMin ?? 'Any'}
                 </Dropdown.Toggle>
-                <Dropdown.Menu>
+                <Dropdown.Menu  style={{maxHeight: '300px', overflowY: 'auto'}}>
                     {bedroomsMin.map((bedroom) => (
                         <Dropdown.Item  className="expandedOptions" key={bedroom} as="button" onClick={() => handleMinBedroomSelect(bedroom)}>
                             {bedroom}
@@ -93,7 +93,7 @@ export function ExpandedSearch({ expandedOptions = {}, onExpandedOptionsChanged,
                 <Dropdown.Toggle className="expandeDropdown" data-bs-toggle="dropdown" data-bs-auto-close="*">
                     {expandedOptions.bedroomsMax ?? 'Any'}
                 </Dropdown.Toggle>
-                <Dropdown.Menu>
+                <Dropdown.Menu  style={{maxHeight: '300px', overflowY: 'auto'}}>
                     {bedroomsMax.map((bedroom) => (
                         <Dropdown.Item className="expandedOptions" key={bedroom} as="button" onClick={() => handleMaxBedroomSelect(bedroom)}>
                             {bedroom}
@@ -107,7 +107,7 @@ export function ExpandedSearch({ expandedOptions = {}, onExpandedOptionsChanged,
                 <Dropdown.Toggle className="expandeDropdown" data-bs-toggle="dropdown" data-bs-auto-close="*">
                     {expandedOptions.bathrooms ?? 'Any'}
                 </Dropdown.Toggle>
-                <Dropdown.Menu>
+                <Dropdown.Menu  style={{maxHeight: '300px', overflowY: 'auto'}}>
                     {bathrooms.map((bathroom) => (
                         <Dropdown.Item className="expandedOptions" key={bathroom} as="button" onClick={() => handleBathroomSelect(bathroom)}>
                             {bathroom}

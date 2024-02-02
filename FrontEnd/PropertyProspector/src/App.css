@@ -181,7 +181,7 @@
 }
 
 .bottomImage {
-  width: 50%;
+  width: 65%;
   height: 90%;
   display: block;
   margin: auto;
@@ -194,7 +194,7 @@
   justify-content: center;
 }
 
-.openHomeHeading h1{
+.openHomeHeading h1 {
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
   font-size: 2em;
@@ -682,95 +682,168 @@
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
 }
 
-/* .openHomeForm {
+.openHomeForm {
   background-color: #E5E0DC;
   font-family: 'Poppins', sans-serif;
-} */
-
-/* .firstAndLastName {
+}
+.openHomeRegisterTitle{
   display: flex;
-  justify-content: flex-start;
-  margin: 10px;
-  background-color: #E5E0DC;
-} */
-
-/* .form-fields-container {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
+ }
+ .openHomeRegisterTitleHeading{
+  margin-right: 50px;
+  font-family: 'Poppins', sans-serif;
+ }
+.form-fields-container {
+  margin: auto;
   background-color: #E5E0DC;
-}  */
-/* .contactContainer div {
-  min-width: 400px;  
-  background-color: #E5E0DC;
-} */
-/* .contactContainer{
-  border: 2px solid #656762;
-  border-bottom-left-radius: 15px 255px;
-  border-bottom-right-radius: 225px 15px;
-  border-top-left-radius: 255px 15px;
-  border-top-right-radius: 15px 225px;
-  background-color: #E5E0DC;
-  
 }
+
+.modal-content {
+  background-color: #E5E0DC;
+}
+
+.firstName {
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 400px;
+  display: inline flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.lastName {
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 400px;
+  display: inline flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.emailAddress {
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 500px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.phoneNumber {
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 400px;
+  display: inline flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.address {
+  box-sizing: border-box;
+  max-width: 1500px;
+  min-width: 670px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
 .contactContainerP {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-bottom: 0;
+  margin-bottom: 20px;
   margin-top: 10px;
   margin-left: 10px;
   background-color: #E5E0DC;
-} */
+  font-size: 1.5em;
+  font-weight: 300;
+  font-family: 'Poppins', sans-serif;
+}
 
-/* 
-.contactDetails {
-  display: flex;
-  justify-content: flex-start;
-  margin: 10px;
-  background-color: #E5E0DC;
-} */
-
-/* .propertyRequirementsP {
+.propertyRequirementsP {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-bottom: 0;
+  margin-bottom: 20px;
   margin-top: 10px;
-  background-color: #E5E0DC; margin-left: 10px;
-}
-
-
-.propertyRequirements {
-  border: 2px solid #656762;
-  border-bottom-left-radius: 15px 255px;
-  border-bottom-right-radius: 225px 15px;
-  border-top-left-radius: 255px 15px;
-  border-top-right-radius: 15px 225px;
-  margin: 10px 20% 10px 20%;
+  margin-left: 10px;
   background-color: #E5E0DC;
-}
-/*  */
-/* .buyingStatusAndBeds {
-  display: flex;
-  justify-content: flex-start;
-  margin: 10px;
-  background-color: #E5E0DC;
+  font-size: 1.5em;
+  font-weight: 300;
+  font-family: 'Poppins', sans-serif;
 }
 
-.bathsLivingAndGarage {
-  display: flex;
-  justify-content: flex-start;
-  margin: 10px;
+
+
+
+.buyingStatus {
+  box-sizing: border-box;
+  width: 315px;
+  max-width: 500px;
+  display: inline flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+.bedsMin{
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 400px;
+  display: inline flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+.bedsMax{
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 400px;
+  display: inline flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+.baths{
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 400px;
+  display: inline flex;
+  flex-wrap: wrap;
+  padding: 10px;
 }
 
-.priceAndSuburb {
-  display: flex;
-  justify-content: flex-start;
-  margin: 10px;
-} */
-*/ .submitOpenHomeRegisterForm {
+.living{
+  box-sizing: border-box;
+  width: 217px;
+  max-width: 400px;
+  display: inline flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+.garage{
+  box-sizing: border-box;
+  width: 216px;
+  max-width: 400px;
+  display: inline flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+.priceLimit{
+  box-sizing: border-box;
+  width: 216px;
+  max-width: 400px;
+  display: inline flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+.suburbs{
+  box-sizing: border-box;
+  width: 1050px;
+  max-width: 7000px;
+  display: block;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+.submitOpenHomeRegisterForm {
   align-self: center;
   background-color: #fff;
   background-image: none;
@@ -813,12 +886,7 @@
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
 }
 
-/* .form-field {
-  flex: 1;
-  margin-right: 100px; 
-  margin-bottom: 10px; 
-  width: calc(50% - 5px);
-}  */
+
 
 /* Property Search */
 .regionDropdown {
@@ -868,6 +936,8 @@
 
 .regionMenu {
   font-family: 'Poppins', sans-serif;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .districtDropdown {
@@ -917,6 +987,8 @@
 
 .districtMenu {
   font-family: 'Poppins', sans-serif;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .suburbDropdown {
@@ -958,11 +1030,12 @@
   transition: all 235ms ease-in-out;
 }
 
-.currentListings{
+.currentListings {
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
 
 }
+
 .suburbDropdown:hover {
   box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
   transform: translate3d(0, 2px, 0);
@@ -976,6 +1049,8 @@
 
 .suburbMenu {
   font-family: 'Poppins', sans-serif;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .search {
@@ -1077,7 +1152,8 @@
   justify-content: space-around;
   animation: fadeIn 2s ease-out;
 }
-.searchBar div{
+
+.searchBar div {
   min-width: 200px;
 }
 
@@ -1131,6 +1207,8 @@
 .expandedOptions {
   font-family: 'Poppins', sans-serif;
   animation: fadeIn 2s ease-out;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .matchingPropertyCard {
@@ -1144,7 +1222,7 @@
   cursor: pointer;
 }
 
-.card-img{
+.card-img {
   height: 190px;
   margin: auto;
 }
@@ -1176,6 +1254,7 @@
   flex-direction: column;
   min-height: 300px;
 }
+
 .matchingPropertyCardFooter {
   text-align: center;
   font-size: .95em;
@@ -1221,8 +1300,10 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  margin-top: auto; /* Push the button to the bottom of the container */
-  margin-bottom: 20px; /* Add margin for separation */
+  margin-top: auto;
+  /* Push the button to the bottom of the container */
+  margin-bottom: 20px;
+  /* Add margin for separation */
 }
 
 .databaseMatchButton:hover {
@@ -1266,24 +1347,29 @@
   align-self: center;
   margin-top: 2rem;
 }
-.matchingClientsRequiremtnsExpanded{
+
+.matchingClientsRequiremtnsExpanded {
   display: flex;
   justify-content: space-between;
   text-align: center;
   align-items: center;
   flex-wrap: wrap;
 }
-.biggerImage{
+
+.biggerImage {
   max-height: 200px;
 }
-.expandedPropertyModal{
+
+.expandedPropertyModal {
   display: flex;
   justify-content: space-around;
 }
-.expandedClientRequirementsModalFooter{
+
+.expandedClientRequirementsModalFooter {
   display: flex;
   justify-content: space-around;
 }
+
 /* 
 .openHomeForm {
   background-color: #E5E0DC;

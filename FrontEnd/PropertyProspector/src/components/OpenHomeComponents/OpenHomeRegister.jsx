@@ -60,27 +60,27 @@ export function OpenHomeRegister() {
         setShow(true);
     };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        if (name === "suburbNames") {
-            const suburbNames = value.split(",").map(x => x.trim()).filter(x => !!x);
-            setFormData({
-                ...formData,
-                suburbNames
-            });
-        } else {
-            setFormData((prevFormData) => ({
-                ...prevFormData,
-                [name]: value,
-            }));
-        }
+   const handleInputChange = (e) => {
+    const { name, value } = e.target;
 
-        // Clear error message when the user starts typing
-        setFormErrors((prevErrors) => ({
-            ...prevErrors,
-            [name]: "",
+    if (name === "suburbNames") {
+        const suburbsArray = value.split(", ").map((suburb) => suburb.trim());
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            suburbNames: suburbsArray,
         }));
-    };
+    } else {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value,
+        }));
+    }
+    // Clear error message when the user starts typing
+    setFormErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: "",
+    }));
+};
 
     const handleSubmit = () => {
         // Check for required fields and display error messages
@@ -162,7 +162,11 @@ export function OpenHomeRegister() {
                                 <td>{attendee.emailAddress}</td>
                                 <td>{attendee.phoneNumber}</td>
                                 <td>{attendee.address}</td>
-                                <td>{attendee.dateAttended}</td>
+                                <td>{new Date(attendee.dateAttended).toLocaleDateString("en-US", {
+                                day: "numeric",
+                                month: "long",
+                                year: "numeric",
+                            })}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -179,16 +183,14 @@ export function OpenHomeRegister() {
             <section>
                 <BottomSection />
             </section>
-            <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)} className="openHomeForm">
-                <ModalHeader closeButton onClick={handleClose}>
-                    <ModalTitle>Register your details below</ModalTitle>
-                    <Button variant="outline" onClick={handleClose}>x</Button>
+            <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)} className="openHomeForm" style={{ backgroundColor: "#E5E0DC"}}>
+                <ModalHeader className="openHomeRegisterTitle" closeButton onClick={handleClose} style={{ backgroundColor: "#E5E0DC"}}>
+                    <ModalTitle className="openHomeRegisterTitleHeading" >Register your details below</ModalTitle>
+    
                 </ModalHeader>
                 <div className="form-fields-container">
-                    <div className="contactContainer">
-                        <p className="contactContainerP">Contact Details</p> 
-                        <div className="firstAndLastName">
-                            <FormGroup controlId="firstName" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
+                        <p className="contactContainerP">Contact Details</p>
+                            <FormGroup controlId="firstName" className="firstName" style={{ marginleft: '10px', marginRight: '10px', backgroundColor: "#E5E0DC" }}>
                                 <FormLabel>First Name</FormLabel>
                                 <FormControl
                                     type="text"
@@ -202,7 +204,7 @@ export function OpenHomeRegister() {
                                     {formErrors.firstName}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <FormGroup controlId="lastName" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <FormGroup controlId="lastName" className="lastName" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Last Name</FormLabel>
                                 <FormControl
                                     type="text"
@@ -216,9 +218,8 @@ export function OpenHomeRegister() {
                                     {formErrors.lastName}
                                 </FormControl.Feedback>
                             </FormGroup>
-                        </div>
-                        <div className="contactDetails">
-                            <FormGroup controlId="emailAddress" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
+        
+                            <FormGroup controlId="emailAddress" className="emailAddress" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Email Address</FormLabel>
                                 <FormControl
                                     type="text"
@@ -232,7 +233,8 @@ export function OpenHomeRegister() {
                                     {formErrors.emailAddress}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <FormGroup controlId="phoneNumber" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <br></br>
+                            <FormGroup controlId="phoneNumber" className="phoneNumber" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Phone Number</FormLabel>
                                 <FormControl
                                     type="text"
@@ -247,7 +249,7 @@ export function OpenHomeRegister() {
                                 </FormControl.Feedback>
                             </FormGroup>
 
-                            <FormGroup controlId="address" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <FormGroup controlId="address" className="address" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Address</FormLabel>
                                 <FormControl
                                     type="text"
@@ -261,12 +263,9 @@ export function OpenHomeRegister() {
                                     {formErrors.address}
                                 </FormControl.Feedback>
                             </FormGroup>
-                        </div>
-                    </div>
-                    <div className="propertyRequirements">
+                
                         <p className="propertyRequirementsP">Property Requirements</p>
-                        <div className="buyingStatusAndBeds">
-                            <FormGroup controlId="buyingOrSelling" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <FormGroup controlId="buyingOrSelling" className="buyingStatus" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Buying or Selling?</FormLabel>
                                 <FormSelect
                                     placeholder="Buying or Selling?"
@@ -283,7 +282,7 @@ export function OpenHomeRegister() {
                                     {formErrors.buyingOrSelling}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <FormGroup controlId="reqBedsMin" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <FormGroup controlId="reqBedsMin" className="bedsMin" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Minimum Bedrooms Required</FormLabel>
                                 <FormSelect
                                     placeholder="Enter your minimum required bedrooms"
@@ -304,7 +303,7 @@ export function OpenHomeRegister() {
                                     {formErrors.reqBedsMin}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <FormGroup controlId="reqBedsMax" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <FormGroup controlId="reqBedsMax" className="bedsMax" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Maximum Bedrooms Required</FormLabel>
                                 <FormSelect
                                     placeholder="Enter your maximum required bedrooms"
@@ -329,9 +328,8 @@ export function OpenHomeRegister() {
                                     {formErrors.reqBedsMax}
                                 </FormControl.Feedback>
                             </FormGroup>
-                        </div>
-                        <div className="bathsLivingAndGarage">
-                            <FormGroup controlId="reqBaths" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <br></br>
+                            <FormGroup controlId="reqBaths" className="baths" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Number of Bathrooms Required</FormLabel>
                                 <FormSelect
                                     type="text"
@@ -353,7 +351,7 @@ export function OpenHomeRegister() {
                                     {formErrors.reqBaths}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <FormGroup controlId="reqLiving" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <FormGroup controlId="reqLiving" className="living" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Living</FormLabel>
                                 <FormSelect
                                     placeholder="Select living requirements"
@@ -372,7 +370,7 @@ export function OpenHomeRegister() {
                                     {formErrors.reqLiving}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <FormGroup controlId="reqGarage" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <FormGroup controlId="reqGarage" className="garage" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Garages</FormLabel>
                                 <FormSelect
                                     placeholder="Select garage requirements"
@@ -397,9 +395,7 @@ export function OpenHomeRegister() {
                                     {formErrors.reqGarage}
                                 </FormControl.Feedback>
                             </FormGroup>
-                        </div>
-                        <div className="priceAndSuburb">
-                            <FormGroup controlId="priceLimit" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <FormGroup controlId="priceLimit" className="priceLimit" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Price Limit</FormLabel>
                                 <FormSelect
                                     placeholder="Select price Limit"
@@ -439,7 +435,7 @@ export function OpenHomeRegister() {
                                     {formErrors.priceLimit}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <FormGroup controlId="suburbNames" className="form-field">
+                            <FormGroup controlId="suburbNames" className="suburbs">
                                 <FormLabel>Suburbs Required</FormLabel>
                                 <FormControl
                                     type="text"
@@ -453,8 +449,6 @@ export function OpenHomeRegister() {
                                     {formErrors.suburbNames}
                                 </FormControl.Feedback>
                             </FormGroup>
-                        </div>
-                    </div>
                 </div>
                 <button className="submitOpenHomeRegisterForm" onClick={handleSubmit}>Submit</button>
                 <BottomSection/>
