@@ -27,10 +27,10 @@ async function init() {
     Suburbs.belongsTo(Client, { foreignKey: "clientID" });
 
     // Setting up the foreign keys 'propertyID' and 'clientID' in the openHomeAttendees table
-    Property.hasMany(OpenHomeAttendee, { foreignKey: "propertyID" });
-    OpenHomeAttendee.belongsTo(Property, { foreignKey: "propertyID" });
-    Client.hasMany(OpenHomeAttendee, { foreignKey: "clientID" });
-    OpenHomeAttendee.belongsTo(Client, { foreignKey: "clientID" });
+    Property.hasMany(OpenHomeAttendee, { foreignKey: "propertyID"});
+    OpenHomeAttendee.belongsTo(Property, { foreignKey: "propertyID"});
+    Client.hasMany(OpenHomeAttendee, { foreignKey: "clientID"});
+    OpenHomeAttendee.belongsTo(Client, { foreignKey: "clientID"});
   } catch (error) {
     console.error("Error syncing models:", error);
   }

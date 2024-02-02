@@ -1,6 +1,8 @@
 import { Col, Card, Container, Row, CardFooter, Button, Modal } from "react-bootstrap";
 import { useState } from "react";
 import MatchingClients from "./MatchingClients";
+import { MdBathroom, MdBedroomChild, MdGarage, MdHouse, MdLiving, MdLocalParking, MdLocationPin, MdOutlineBathroom, MdSquareFoot } from "react-icons/md";
+import homeImage from "../../assets/homeImage.png";
 
 export function PropertyResults({ matchingProperties, searchPerformed }) {
     const [modalShow, setModalShow] = useState(false);
@@ -11,7 +13,7 @@ export function PropertyResults({ matchingProperties, searchPerformed }) {
         setModalShow(true);
     };
 
-console.log("matchingProperties", typeof matchingProperties);
+    console.log("matchingProperties", typeof matchingProperties);
     return (
         <Container>
             <Row>
@@ -19,16 +21,38 @@ console.log("matchingProperties", typeof matchingProperties);
                     matchingProperties.map((property) => {
                         return (
                             <Col key={property.ListingId}>
-                                <Card style={{ width: "18rem" }} onClick={() => openModal(property)}>
-                                    <Card.Body>
+                                <Card style={{ width: "18rem" }} onClick={() => openModal(property)} className="matchingPropertyCard">
+                                    <Card.Body className="matchingPropertyCardBody">
                                         <Card.Title>{property.Address}</Card.Title>
-                                        <Card.Img src={property.PictureHref ? property.PictureHref : property.PhotoUrls} alt="PropertyImage" />
+                                        <Card.Img
+                                            src={property.PictureHref || homeImage}
+                                            alt="PropertyImage"
+                                            className="MatchingPropertyImage"
+                                        />
                                     </Card.Body>
-                                    <CardFooter>
-                                        {`${property.Bedrooms} Bedrooms, ${property.Bathrooms} Bathrooms, ${property.Parking},  ${property.Lounges !== null ? property.Lounges + " Living," : ""} Parking: ${property.TotalParking} Property Type:${property.PropertyType}, Area: ${property.Area} `}
-                                        <Button variant="primary" onClick={() => openModal(property)}>
-                                            Match to database
-                                        </Button>
+                                    <CardFooter className="matchingPropertyCardFooter">
+                                        <p className="propertyInfo">
+                                            {property.Bedrooms !== undefined && (
+                                                <p><MdBedroomChild className="smallIcon" />{`${property.Bedrooms} Bedrooms,`}</p>
+                                            )}
+                                            {property.Bathrooms !== undefined && (
+                                                <p><MdOutlineBathroom className="smallIcon" />{`${property.Bathrooms} Bathrooms,`}</p>
+                                            )}
+                                            {property.Lounges !== undefined && property.Lounges !== null && (
+                                                <p><MdLiving className="smallIcon" />{`${property.Lounges} Living,`}</p>
+                                            )}
+                                            {property.TotalParking !== undefined && (
+                                                <p><MdGarage className="smallIcon" />{`Parking: ${property.TotalParking}`}</p>
+                                            )}
+                                            {property.PropertyType !== undefined && (
+                                                <p><MdHouse className="smallIcon" />{`Property Type: ${property.PropertyType},`}</p>
+                                            )}
+                                        </p>
+                                        <div>
+                                            <button className="databaseMatchButton" onClick={() => openModal(property)}>
+                                                Match to clients
+                                            </button>
+                                        </div>
                                     </CardFooter>
                                 </Card>
                             </Col>
@@ -50,18 +74,60 @@ console.log("matchingProperties", typeof matchingProperties);
                         {selectedProperty && selectedProperty.Address}
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className="expandedPropertyModal">
                     {selectedProperty && (
-                        <p>
-                            <Card.Img src={selectedProperty.PictureHref ? selectedProperty.PictureHref : selectedProperty.PhotoUrls} alt="PropertyImage" />
-                            Bedrooms: {selectedProperty.Bedrooms}, Bathrooms: {selectedProperty.Bathrooms}, Living:{selectedProperty.Lounges}, Parking: {selectedProperty.Parking}, Property Type: {selectedProperty.PropertyType}, Area: {selectedProperty.Area}, Land Area: {selectedProperty.LandArea}
-                            {/* Add more details as needed */}
-                        </p>
+                        <>
+                            <div>
+                                <img
+                                    src={selectedProperty.PictureHref || homeImage}
+                                    alt="PropertyImage"
+                                    className="biggerImage"
+                                />
+                            </div>
+                            <ul className="matchingClientsRequirementsExpanded">
+                                {selectedProperty.Bedrooms !== undefined && (
+                                    <li>
+                                        <MdBedroomChild /> Bedrooms: {selectedProperty.Bedrooms}
+                                    </li>
+                                )}
+                                {selectedProperty.Bathrooms !== undefined && (
+                                    <li>
+                                        <MdBathroom /> Bathrooms: {selectedProperty.Bathrooms}
+                                    </li>
+                                )}
+                                {selectedProperty.Lounges !== undefined && selectedProperty.Lounges !== null && (
+                                    <li>
+                                        <MdLiving /> Living: {selectedProperty.Lounges}
+                                    </li>
+                                )}
+                                {selectedProperty.Parking !== undefined && (
+                                    <li>
+                                        <MdLocalParking /> Parking: {selectedProperty.Parking}
+                                    </li>
+                                )}
+                                {selectedProperty.PropertyType !== undefined && (
+                                    <li>
+                                        <MdHouse /> Property Type: {selectedProperty.PropertyType}
+                                    </li>
+                                )}
+                                {selectedProperty.Area !== undefined && (
+                                    <li>
+                                        <MdSquareFoot /> Area: {selectedProperty.Area}
+                                    </li>
+                                )}
+                                {selectedProperty.LandArea !== undefined && (
+                                    <li>
+                                        <MdLocationPin /> Land Area: {selectedProperty.LandArea}
+                                    </li>
+                                )}
+                                {/* Add more details as needed */}
+                            </ul>
+                        </>
                     )}
                 </Modal.Body>
-                <Modal.Footer>
-                    <MatchingClients suburb={selectedProperty?.Suburb} bedrooms={selectedProperty?.Bedrooms} bathrooms={selectedProperty?.Bathrooms}/>
-                    <Button onClick={() => setModalShow(false)}>Close</Button>
+                <Modal.Footer className="expandedClientRequirementsModalFooter">
+                    <MatchingClients suburb={selectedProperty?.Suburb} bedrooms={selectedProperty?.Bedrooms} bathrooms={selectedProperty?.Bathrooms} />
+                    {/* <button className='closeModal' onClick={() => setModalShow(false)}>Close</button> */}
                 </Modal.Footer>
             </Modal>
         </Container>

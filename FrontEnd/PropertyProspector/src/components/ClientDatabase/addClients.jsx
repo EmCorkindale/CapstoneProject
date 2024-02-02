@@ -1,196 +1,78 @@
-import { Button, Modal, FormGroup, FormLabel, FormControl, FormSelect, ModalTitle, ModalHeader } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { apiGetOpenHomeAttendees } from "./openHomeAttendeesApi";
-import { apiAddOpenHomeAttendees } from "./openHomeAttendeesApi";
-import { BottomSection } from "../Reusable/BottomSection";
+import React, { useState } from "react";
+import { Button, Modal, FormGroup, FormLabel, FormControl, FormSelect, ModalTitle, ModalHeader } from 'react-bootstrap';
+import { apiAddClients } from "./apiAddClients";
 
-export function OpenHomeRegister() {
-    const { propertyID } = useParams();
-    const navigate = useNavigate();
-    const [fullscreen, setFullscreen] = useState(true);
+export function AddClients() {
     const [show, setShow] = useState(false);
-    const [attendees, setAttendees] = useState([]);
     const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
-        emailAddress: "",
-        phoneNumber: "",
-        address: "",
-        buyingOrSelling: "",
-        reqBedsMin: "",
-        reqBedsMax: "",
-        reqBaths: "",
-        reqLiving: "",
-        reqGarage: "",
-        priceLimit: "",
-        suburbNames: "",
+      firstName: "",
+      lastName: "",
+      emailAddress: "",
+      phoneNumber: "",
+      address: "",
+      buyingOrSelling: "",
+      reqBedsMin: "",
+      reqBedsMax: "",
+      reqBaths: "",
+      reqLiving: "",
+      reqGarage: "",
+      priceLimit: "",
+      suburbNames: "",
     });
-
-    const [formErrors, setFormErrors] = useState({
-        firstName: "",
-        lastName: "",
-        emailAddress: "",
-        phoneNumber: "",
-        address: "",
-        buyingOrSelling: "",
-        reqBedsMin: "",
-        reqBedsMax: "",
-        reqBaths: "",
-        reqLiving: "",
-        reqGarage: "",
-        priceLimit: "",
-        suburbNames: "",
-    });
-
-    useEffect(() => {
-        if (propertyID) {
-            apiGetOpenHomeAttendees(propertyID)
-                .then((result) => {
-                    setAttendees(result.attendeeDetails)
-                })
-                .catch((error) => {
-                    console.error("Error fetching attendees:", error);
-                });
-        }
-    }, [propertyID]);
-
-    const handleShow = (breakpoint) => {
-        setFullscreen(breakpoint);
-        setShow(true);
+    const [formErrors, setFormErrors] = useState({});
+    const [error, setError] = useState("");
+  
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value });
     };
-
-   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-
-    if (name === "suburbNames") {
-        const suburbsArray = value.split(", ").map((suburb) => suburb.trim());
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            suburbNames: suburbsArray,
-        }));
-    } else {
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            [name]: value,
-        }));
-    }
-    // Clear error message when the user starts typing
-    setFormErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: "",
-    }));
-};
-
+  
     const handleSubmit = () => {
-        // Check for required fields and display error messages
-        const errors = {};
-        Object.keys(formData).forEach((field) => {
-            if (!formData[field]) {
-                errors[field] = "This field is required.";
-            }
-        });
-
-        if (Object.keys(errors).length > 0) {
-            // Display error messages and prevent form submission
-            setFormErrors(errors);
+        // Reset error state before making the API call
+        setError("");
+        setFormErrors({}); // Reset form errors
+    
+        // Check if required fields are filled
+        const requiredFields = ['firstName', 'lastName', 'emailAddress', 'phoneNumber'];
+        const missingFields = requiredFields.filter(field => !formData[field]);
+    
+        if (missingFields.length > 0) {
+            setError(`Please fill in the required fields: ${missingFields.join(', ')}`);
             return;
         }
-
-        apiAddOpenHomeAttendees(propertyID, formData)
-            .then((result) => {
-                console.log("Attendee added successfully:", result);
-                setFormData({
-                    firstName: "",
-                    lastName: "",
-                    emailAddress: "",
-                    phoneNumber: "",
-                    address: "",
-                    buyingOrSelling: "",
-                    reqBedsMin: "",
-                    reqBedsMax: "",
-                    reqBaths: "",
-                    reqLiving: "",
-                    reqGarage: "",
-                    priceLimit: "",
-                    suburbNames: "",
-                });
+    
+        // Call the API function with the form data
+        apiAddClients(formData)
+            .then((response) => {
+                console.log(response);
+                // Handle success
+                // Implement the logic to handle the successful response, e.g., show a success message or redirect
             })
             .catch((error) => {
-                console.error("Error adding attendee:", error);
+                console.error("Error adding client:", error);
+                // Set error state for displaying the error message
+                setError("Error adding client. Please try again.");
+    
+                // If the error response contains field-specific errors, update the formErrors state
+                if (error.response && error.response.data && error.response.data.errors) {
+                    setFormErrors(error.response.data.errors);
+                }
             });
     };
-
-    const handleClose = () => {
-        setShow(false);
-        apiGetOpenHomeAttendees(propertyID)
-            .then((result) => {
-                setAttendees(result.attendeeDetails);
-            })
-            .catch((error) => {
-                console.error("Error fetching attendees:", error);
-            });
-    };
-
-    function returnToOpenHomes() {
-        navigate("/openHomes");
-    }
 
     return (
         <>
-            <div className="openHomeRegisterHeading">
-                <h1>Open Home Register</h1>
-            </div>
-            <section className="openHomeRegister">
-                <table className="openHomeRegisterTable">
-                    <thead className="openHomeRegisterTableHeadings">
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email Address</th>
-                            <th>Phone Number</th>
-                            <th>Address</th>
-                            <th>Date Attended</th>
-                        </tr>
-                    </thead>
-                    <tbody className="openHomeRegisterBody">
-                        {attendees.map((attendee, index) => (
-                            <tr key={attendee.openHomeAttendeeID}
-                                className={index % 2 === 0 ? 'OpenHomeEvenRow' : 'OpenHomeOddRow'}>
-                                <td>{attendee.firstName}</td>
-                                <td>{attendee.lastName}</td>
-                                <td>{attendee.emailAddress}</td>
-                                <td>{attendee.phoneNumber}</td>
-                                <td>{attendee.address}</td>
-                                <td>{new Date(attendee.dateAttended).toLocaleDateString("en-US", {
-                                day: "numeric",
-                                month: "long",
-                                year: "numeric",
-                            })}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </section>
-            <div className="openHomeAttendeesButtons">
-                <button onClick={() => handleShow(fullscreen)} className="addOpenHomeAttendeesButton">
-                    Add attendees to register
-                    {typeof fullscreen === 'string' && `below ${fullscreen.split('-')[0]}`}</button>
-                <button onClick={returnToOpenHomes} className="returnToOpenHomesButton">
-                    x
-                </button>
-            </div>
-            <section>
-                <BottomSection />
-            </section>
-            <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)} className="openHomeForm" style={{ backgroundColor: "#E5E0DC"}}>
-                <ModalHeader className="openHomeRegisterTitle" closeButton onClick={handleClose} style={{ backgroundColor: "#E5E0DC"}}>
-                    <ModalTitle className="openHomeRegisterTitleHeading" >Register your details below</ModalTitle>
-    
+            <button onClick={() => setShow(true)}>Open Modal</button>
+             <Modal show={show} onHide={() => setShow(false)} className="openHomeForm">
+                <ModalHeader closeButton onClick={()=>setShow(false)}>
+                    <ModalTitle>Register your details below</ModalTitle>
+                    <Button variant="outline" onClick={()=>setShow(false)}>x</Button>
                 </ModalHeader>
                 <div className="form-fields-container">
-                        <p className="contactContainerP">Contact Details</p>
-                            <FormGroup controlId="firstName" className="firstName" style={{ marginleft: '10px', marginRight: '10px', backgroundColor: "#E5E0DC" }}>
+                    <div className="contactContainer">
+                        <p className="contactContainerP">Contact Details</p> 
+                        <div className="firstAndLastName">
+                            <FormGroup controlId="firstName" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>First Name</FormLabel>
                                 <FormControl
                                     type="text"
@@ -204,7 +86,7 @@ export function OpenHomeRegister() {
                                     {formErrors.firstName}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <FormGroup controlId="lastName" className="lastName" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <FormGroup controlId="lastName" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Last Name</FormLabel>
                                 <FormControl
                                     type="text"
@@ -218,8 +100,9 @@ export function OpenHomeRegister() {
                                     {formErrors.lastName}
                                 </FormControl.Feedback>
                             </FormGroup>
-        
-                            <FormGroup controlId="emailAddress" className="emailAddress" style={{ marginleft: '10px', marginRight: '10px' }}>
+                        </div>
+                        <div className="contactDetails">
+                            <FormGroup controlId="emailAddress" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Email Address</FormLabel>
                                 <FormControl
                                     type="text"
@@ -233,8 +116,7 @@ export function OpenHomeRegister() {
                                     {formErrors.emailAddress}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <br></br>
-                            <FormGroup controlId="phoneNumber" className="phoneNumber" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <FormGroup controlId="phoneNumber" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Phone Number</FormLabel>
                                 <FormControl
                                     type="text"
@@ -249,7 +131,7 @@ export function OpenHomeRegister() {
                                 </FormControl.Feedback>
                             </FormGroup>
 
-                            <FormGroup controlId="address" className="address" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <FormGroup controlId="address" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Address</FormLabel>
                                 <FormControl
                                     type="text"
@@ -263,9 +145,12 @@ export function OpenHomeRegister() {
                                     {formErrors.address}
                                 </FormControl.Feedback>
                             </FormGroup>
-                
+                        </div>
+                    </div>
+                    <div className="propertyRequirements">
                         <p className="propertyRequirementsP">Property Requirements</p>
-                            <FormGroup controlId="buyingOrSelling" className="buyingStatus" style={{ marginleft: '10px', marginRight: '10px' }}>
+                        <div className="buyingStatusAndBeds">
+                            <FormGroup controlId="buyingOrSelling" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Buying or Selling?</FormLabel>
                                 <FormSelect
                                     placeholder="Buying or Selling?"
@@ -282,7 +167,7 @@ export function OpenHomeRegister() {
                                     {formErrors.buyingOrSelling}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <FormGroup controlId="reqBedsMin" className="bedsMin" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <FormGroup controlId="reqBedsMin" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Minimum Bedrooms Required</FormLabel>
                                 <FormSelect
                                     placeholder="Enter your minimum required bedrooms"
@@ -303,7 +188,7 @@ export function OpenHomeRegister() {
                                     {formErrors.reqBedsMin}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <FormGroup controlId="reqBedsMax" className="bedsMax" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <FormGroup controlId="reqBedsMax" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Maximum Bedrooms Required</FormLabel>
                                 <FormSelect
                                     placeholder="Enter your maximum required bedrooms"
@@ -328,8 +213,9 @@ export function OpenHomeRegister() {
                                     {formErrors.reqBedsMax}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <br></br>
-                            <FormGroup controlId="reqBaths" className="baths" style={{ marginleft: '10px', marginRight: '10px' }}>
+                        </div>
+                        <div className="bathsLivingAndGarage">
+                            <FormGroup controlId="reqBaths" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Number of Bathrooms Required</FormLabel>
                                 <FormSelect
                                     type="text"
@@ -351,7 +237,7 @@ export function OpenHomeRegister() {
                                     {formErrors.reqBaths}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <FormGroup controlId="reqLiving" className="living" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <FormGroup controlId="reqLiving" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Living</FormLabel>
                                 <FormSelect
                                     placeholder="Select living requirements"
@@ -370,7 +256,7 @@ export function OpenHomeRegister() {
                                     {formErrors.reqLiving}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <FormGroup controlId="reqGarage" className="garage" style={{ marginleft: '10px', marginRight: '10px' }}>
+                            <FormGroup controlId="reqGarage" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Garages</FormLabel>
                                 <FormSelect
                                     placeholder="Select garage requirements"
@@ -395,7 +281,9 @@ export function OpenHomeRegister() {
                                     {formErrors.reqGarage}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <FormGroup controlId="priceLimit" className="priceLimit" style={{ marginleft: '10px', marginRight: '10px' }}>
+                        </div>
+                        <div className="priceAndSuburb">
+                            <FormGroup controlId="priceLimit" className="form-field" style={{ marginleft: '10px', marginRight: '10px' }}>
                                 <FormLabel>Price Limit</FormLabel>
                                 <FormSelect
                                     placeholder="Select price Limit"
@@ -435,7 +323,7 @@ export function OpenHomeRegister() {
                                     {formErrors.priceLimit}
                                 </FormControl.Feedback>
                             </FormGroup>
-                            <FormGroup controlId="suburbNames" className="suburbs">
+                            <FormGroup controlId="suburbNames" className="form-field">
                                 <FormLabel>Suburbs Required</FormLabel>
                                 <FormControl
                                     type="text"
@@ -449,10 +337,11 @@ export function OpenHomeRegister() {
                                     {formErrors.suburbNames}
                                 </FormControl.Feedback>
                             </FormGroup>
+                        </div>
+                    </div>
                 </div>
                 <button className="submitOpenHomeRegisterForm" onClick={handleSubmit}>Submit</button>
-                <BottomSection/>
             </Modal>
-        </>
-    );
-}
+            </>
+    )
+};

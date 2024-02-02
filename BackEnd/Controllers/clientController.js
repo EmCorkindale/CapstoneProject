@@ -61,9 +61,10 @@ const getSpecificClient = (req, res) => {
 //Function to add new client to users' client base
 const addClient = async (req, res) => {
   const client = req.body;
-  const createdClient = await Models.Client.create(client);
+  const createdClient = await Models.Client.create(client); 
   res.send({ result: 200, client: createdClient });
 };
+
 
 //Function for deleting clients
 const deleteClient = async (req, res) => {

@@ -41,12 +41,12 @@ export default function SuburbSelected({ selectedRegion, selectedDistrict, selec
   return (
     <div className='suburbSelect'>
       <Dropdown autoClose={false}>
-        <Dropdown.Toggle variant="success" id="dropdown-autoclose-false">
+        <Dropdown.Toggle id="dropdown-autoclose-false" className='suburbDropdown'>
           {selectedSuburbs.length > 0
             ? selectedSuburbs.map((suburb) => suburb.Name).join(', ')
             : 'Select Suburb'}
         </Dropdown.Toggle>
-        <Dropdown.Menu>
+        <Dropdown.Menu className='suburbMenu'>
           {suburbs.map((suburbItem, index) => (
             <Dropdown.Item key={suburbItem.SuburbId} className="checkbox-inline">
               <input
