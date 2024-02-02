@@ -62,7 +62,7 @@ export function OpenHomes() {
                                         <OpenHomeRegister propertyID={property.propertyID} />
                                     )}
                                     <button role="button" onClick={() => handleCardClick(property.propertyID)} className='openHomeRegisterButton'>
-                                        Open Home Register
+                                       Open Homes
                                     </button>
                                     <button role="button" onClick={() => handleDelete(property.propertyID)} className='openHomeDeleteButton'>
                                         Delete Property

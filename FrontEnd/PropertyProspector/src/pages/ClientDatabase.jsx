@@ -59,7 +59,7 @@ export function ClientDatabase() {
             {clients.map((client, index) => (
               <Fragment key={client.clientID}>
                 <tr
-                  className={index % 2 === 0 ? 'even-row' : 'odd-row'}
+                  className={`clientRow ${index % 2 === 0 ? 'even-row' : 'odd-row'} ${hoveredClient === client.clientID ? 'hovered' : ''}`}
                   onClick={() => handleSelectClient(client.clientID)}
                   onMouseOver={() => handleHoverClient(client.clientID)}
                   onMouseOut={handleLeaveClient}
@@ -80,7 +80,7 @@ export function ClientDatabase() {
                 {hoveredClient === client.clientID && (
                   <tr>
                     <td colSpan={6}>
-                      <HoverPropertyRequirements clientID={hoveredClient} />
+                      <HoverPropertyRequirements clientID={hoveredClient} className= "hoverPropertyRequirements" />
                     </td>
                   </tr>
                 )}

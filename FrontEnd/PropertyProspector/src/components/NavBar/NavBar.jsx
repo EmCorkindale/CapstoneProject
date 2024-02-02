@@ -23,7 +23,7 @@ export default function NavBar() {
         <>
             <Navbar expand="lg" className="NavBar">
                 <Container fluid>
-                    <Navbar.Brand onClick={() => { navigate('/') }}><img src={"../src/assets/logo.png"} className='logo' alt="Logo" /></Navbar.Brand>
+                    <Navbar.Brand onClick={() => { navigate('/') }}><img src={"../src/assets/logoTransparent.png"} className='logo' alt="Logo" /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="d-flex ms-auto">

@@ -47,6 +47,7 @@
   height: 400px;
   display: flex;
   justify-content: center;
+  margin-top: 100px;
 }
 
 .homeImage {
@@ -114,7 +115,11 @@
 }
 
 .logo {
-  max-height: 100px;
+  max-height: 40px;
+  margin-top: 0;
+}
+.logo:hover{
+  transform: scale(1.1);
 }
 
 .login {
@@ -266,6 +271,7 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  margin: 0px, 10px, 0px, 10px;
 }
 
 .openHomeRegisterButton:hover {
@@ -328,7 +334,7 @@
   justify-content: flex-start;
   align-items: center;
   color: #656762;
-  height: 286px;
+  height: 287px;
   margin: 0 auto;
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
@@ -1388,6 +1394,14 @@
   margin: 0 auto;
 }
 
+.clientRow {
+  transition: background-color 0.9s ease-in;
+}
+
+.clientRow.hovered {
+  background-color: #f0f0f0; /* Adjust the background color as needed */
+  cursor: pointer;
+}
 .database {
   width: 100%;
   border-collapse: collapse;
