@@ -79,7 +79,7 @@ export function PropertyResults({ matchingProperties, searchPerformed }) {
                         <>
                             <div>
                                 <img
-                                    src={selectedProperty.PictureHref || homeImage}
+                                    src={ homeImage}
                                     alt="PropertyImage"
                                     className="biggerImage"
                                 />
@@ -127,7 +127,7 @@ export function PropertyResults({ matchingProperties, searchPerformed }) {
                 </Modal.Body>
                 <Modal.Footer className="expandedClientRequirementsModalFooter">
                     <MatchingClients suburb={selectedProperty?.Suburb} bedrooms={selectedProperty?.Bedrooms} bathrooms={selectedProperty?.Bathrooms} />
-                    {/* <button className='closeModal' onClick={() => setModalShow(false)}>Close</button> */}
+                    {/* <button className='' onClick={() => setModalShow(false)}>Close</button> */}
                 </Modal.Footer>
             </Modal>
         </Container>
